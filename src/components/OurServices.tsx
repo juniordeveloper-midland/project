@@ -18,9 +18,9 @@ const OurServices = () => {
           {/* Static Guarding */}
           <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
             <div className="p-4 pt-0">
-              <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+              <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
                 <img 
-                  src="" 
+                  src="https://i.postimg.cc/3xvQxxW6/side-view-male-janitor.jpg" 
                   alt="Static Guarding - Professional security guard in high-visibility uniform"
                   className="w-full h-full object-cover object-center"
                 />
@@ -40,9 +40,9 @@ const OurServices = () => {
           {/* Man Guarding */}
           <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
             <div className="p-4 pt-6">
-              <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+              <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
                 <img 
-                  src="" 
+                  src="https://i.postimg.cc/RZMpjCKK/security-guard-workspace.jpg" 
                   alt="Man Guarding - Professional security officer in tactical gear"
                   className="w-full h-full object-cover object-center"
                 />
@@ -62,9 +62,9 @@ const OurServices = () => {
           {/* Private Security */}
           <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
             <div className="p-4 pt-6">
-            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+            <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="" 
+                src="https://i.postimg.cc/7YBSZqjg/portrait-male-security-guard-with-radio-station-1.jpg" 
                 alt="Private Security - Professional security personnel with radio equipment"
                 className="w-full h-full object-cover object-center"
               />
@@ -84,9 +84,9 @@ const OurServices = () => {
           {/* Mobile Patrols */}
           <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
             <div className="p-4 pt-6">
-            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+            <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="" 
+                src="https://images.pexels.com/photos/8591608/pexels-photo-8591608.jpeg" 
                 alt="Mobile Patrols - Security patrol vehicle and officer"
                 className="w-full h-full object-cover object-center"
               />
@@ -106,9 +106,9 @@ const OurServices = () => {
           {/* Event Security */}
           <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
             <div className="p-4 pt-6">
-            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+            <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="" 
+                src="https://i.postimg.cc/W3HP4FmB/security-guard-standing-scanning-door.jpg" 
                 alt="Event Security - Security officers at event venue entrance"
                 className="w-full h-full object-cover object-center"
               />
@@ -128,9 +128,9 @@ const OurServices = () => {
           {/* Access Control */}
           <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
             <div className="p-4 pt-6">
-            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+            <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="" 
+                src="https://i.postimg.cc/k5ZmJRvk/smiling-airport-security-officer-holding-metal-detector-airport-terminal.jpg" 
                 alt="Access Control - Professional security officer at building entrance"
                 className="w-full h-full object-cover object-center"
               />
