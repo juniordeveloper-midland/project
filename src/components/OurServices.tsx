@@ -14,119 +14,135 @@ const OurServices = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Row 1 */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-48 bg-gray-200">
-              <img 
-                src="" 
-                alt="Static Guarding"
-                className="w-full h-full object-cover"
-              />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Static Guarding */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
+            <div className="p-4 pt-0">
+              <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+                <img 
+                  src="" 
+                  alt="Static Guarding - Professional security guard in high-visibility uniform"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Static Guarding</h3>
+            <div className="px-4 pb-4">
+              <h3 className="text-lg font-bold text-blue-700 mb-2">Static Guarding</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                Our static guarding services offer highly trained security personnel who provide constant surveillance and protection for your premises, ensuring the safety of your assets at all times.
+                Fixed guards provide constant protection. They deter intruders and control access. Our officers monitor and prevent risks. Reliable presence for total peace of mind.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors duration-200">
-                View More
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+                View More →
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-48 bg-gray-200">
-              <img 
-                src="" 
-                alt="Man Guarding"
-                className="w-full h-full object-cover"
-              />
+          {/* Man Guarding */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
+            <div className="p-4 pt-6">
+              <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
+                <img 
+                  src="" 
+                  alt="Man Guarding - Professional security officer in tactical gear"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Man Guarding</h3>
+            <div className="px-4 pb-4">
+              <h3 className="text-lg font-bold text-blue-700 mb-2">Man Guarding</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Expert officers trained in conflict resolution, crowd control, and emergency response. Our man guarding services provide professional protection tailored to your specific needs.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors duration-200">
-                View More
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+                View More →
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-48 bg-gray-200">
+          {/* Private Security */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
+            <div className="p-4 pt-6">
+            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
                 src="" 
-                alt="Private Security"
-                className="w-full h-full object-cover"
+                alt="Private Security - Professional security personnel with radio equipment"
+                className="w-full h-full object-cover object-center"
               />
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Private Security</h3>
+            </div>
+            <div className="p-4 ">
+              <h3 className="text-lg font-bold text-blue-700 mb-2">Private Security</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Discreet security solutions and close protection services for high-profile individuals, executives, and VIPs requiring personal protection.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors duration-200">
-                View More
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+                View More →
               </button>
             </div>
           </div>
 
-          {/* Row 2 */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-48 bg-gray-200">
+          {/* Mobile Patrols */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
+            <div className="p-4 pt-6">
+            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
                 src="" 
-                alt="Mobile Patrols"
-                className="w-full h-full object-cover"
+                alt="Mobile Patrols - Security patrol vehicle and officer"
+                className="w-full h-full object-cover object-center"
               />
             </div>
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Mobile Patrols</h3>
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-bold text-blue-700 mb-2">Mobile Patrols</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Regular drive-by and patrol visits. Mobile Security patrols are ideal for checking multiple sites, providing visible deterrent and rapid response capabilities.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors duration-200">
-                View More
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+                View More →
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-48 bg-gray-200">
+          {/* Event Security */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
+            <div className="p-4 pt-6">
+            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
                 src="" 
-                alt="Event Security"
-                className="w-full h-full object-cover"
+                alt="Event Security - Security officers at event venue entrance"
+                className="w-full h-full object-cover object-center"
               />
             </div>
+            </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Event Security</h3>
+              <h3 className="text-xl font-bold text-blue-700 mb-3">Event Security</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Events manage access and crowd control. We provide bag searches and crowd management, ensuring your event runs smoothly and safely for all attendees.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors duration-200">
-                View More
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors duration-200 inline-flex items-center">
+                View More →
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="h-48 bg-gray-200">
+          {/* Access Control */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 max-w-sm mx-auto">
+            <div className="p-4 pt-6">
+            <div className="h-72 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
                 src="" 
-                alt="Access Control"
-                className="w-full h-full object-cover"
+                alt="Access Control - Professional security officer at building entrance"
+                className="w-full h-full object-cover object-center"
               />
             </div>
+            </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-3">Access Control</h3>
+              <h3 className="text-xl font-bold text-blue-700 mb-3">Access Control</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Officers verify visiting users entry. We check all visitors and staff entry, maintaining detailed logs and ensuring only authorized personnel access your premises.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-medium transition-colors duration-200">
-                View More
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors duration-200 inline-flex items-center">
+                View More →
               </button>
             </div>
           </div>
