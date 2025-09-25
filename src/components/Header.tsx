@@ -8,7 +8,7 @@ const Header = () => {
           {/* Logo + Brand */}
           <div className="flex items-center space-x-2">
             <img
-              src=""
+              src="https://i.postimg.cc/8P6cvDY8/g20.jpg"
               alt="G20 Security Logo"
               className="h-10 w-auto"
             />
