@@ -17,7 +17,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="" 
+                src="https://images.pexels.com/photos/8591605/pexels-photo-8591605.jpeg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />
@@ -40,7 +40,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="" 
+                src="https://i.postimg.cc/tgyjYGKz/security-guard-protecting-client.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />
@@ -63,7 +63,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="" 
+                src="https://i.postimg.cc/vZ8RstfP/side-view-security-men-working.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />
@@ -86,7 +86,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="" 
+                src="https://i.postimg.cc/gJHqm8vD/portrait-male-security-guard-with-barbed-wire-fence-1.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />

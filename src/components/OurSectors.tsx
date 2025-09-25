@@ -27,19 +27,19 @@ const OurSectors = () => {
         title: "CCTV Monitoring",
         description:
           "Proactive camera monitoring to quickly detect and respond to incidents.",
-        imageUrl: "",
+        imageUrl: "https://i.postimg.cc/tgyjYGKz/security-guard-protecting-client.jpg",
       },
       {
         title: "Access Control",
         description:
           "Manage and restrict entry with professional access control solutions.",
-        imageUrl: "",
+        imageUrl: "https://i.postimg.cc/vZ8RstfP/side-view-security-men-working.jpg",
       },
       {
         title: "Retail Security",
         description:
           "Loss prevention and customer safety with trained retail security staff.",
-        imageUrl: "",
+        imageUrl: "https://i.postimg.cc/gJHqm8vD/portrait-male-security-guard-with-barbed-wire-fence-1.jpg",
       },
     ],
     []
