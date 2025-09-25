@@ -3,30 +3,31 @@ import { Zap, Users, Shield, Calendar, MapPin, Settings } from 'lucide-react';
 
 const AboutUs = () => {
   return (
-    <section className="bg-blue-700 py-16">
+    <section className="bg-blue-900 py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-2">About Us</h2>
-          <div className="w-16 h-1 bg-white mx-auto mb-8"></div>
+          <div className="w-32 h-1 bg-white mx-auto mb-8"></div>
           <p className="text-white text-lg max-w-4xl mx-auto leading-relaxed">
             G20 Security delivers trusted, SIA-approved protection with 24/7 nationwide coverage and years of expertise. Our 
             tailored solutions, skilled guards, and guard tracking ensure safety and peace of mind for every client.
           </p>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-4 gap-8 items-start">
-          {/* Cards Grid - Takes 3 columns */}
-          <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cards Container with White Background */}
+        <div className="relative">
+          {/* White Background Container */}
+          <div className="bg-white bg-opacity-20 rounded-2xl p-8 mx-auto max-w-6xl">
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Row 1 */}
               <div className="bg-white rounded-lg p-6 shadow-lg">
                 <div className="text-center">
                   <div className="flex justify-center mb-4">
                     <Zap className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  <h3 className="text-base font-semibold text-blue-600 mb-3">
                     Fast Response Security Guards
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -40,7 +41,7 @@ const AboutUs = () => {
                   <div className="flex justify-center mb-4">
                     <Users className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  <h3 className="text-base font-semibold text-blue-600 mb-3">
                     24/7 Security Coverage
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -54,11 +55,11 @@ const AboutUs = () => {
                   <div className="flex justify-center mb-4">
                     <Shield className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  <h3 className="text-base font-semibold text-blue-600 mb-3">
                     SIA Approved Security
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
-                    We are licensed by the SIA, ensuring high-quality and comprehensive security that only SIA can trust.
+                    We are licensed by the SIA, ensuring high-quality and compliant security guarding services you can trust.
                   </p>
                 </div>
               </div>
@@ -69,7 +70,7 @@ const AboutUs = () => {
                   <div className="flex justify-center mb-4">
                     <Calendar className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  <h3 className="text-base font-semibold text-blue-600 mb-3">
                     10+ Years of Experience
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -83,7 +84,7 @@ const AboutUs = () => {
                   <div className="flex justify-center mb-4">
                     <MapPin className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  <h3 className="text-base font-semibold text-blue-600 mb-3">
                     Nationwide UK Coverage
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -97,7 +98,7 @@ const AboutUs = () => {
                   <div className="flex justify-center mb-4">
                     <Settings className="w-8 h-8 text-blue-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  <h3 className="text-base font-semibold text-blue-600 mb-3">
                     Customised Security Plans
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
@@ -108,17 +109,21 @@ const AboutUs = () => {
             </div>
           </div>
 
-          {/* Security Guard Image - Takes 1 column */}
-          <div className="lg:col-span-1">
-            <div className="flex justify-center lg:justify-end">
+          
+        </div>
+        {/* Security Guard Image - Positioned at bottom right */}
+          <div className="absolute bottom-0 right-0 hidden lg:block">
+            <div className="relative">
               <img 
                 src="" 
                 alt="Professional Security Guard"
-                className="w-full max-w-sm h-auto rounded-lg shadow-xl"
+                className=" w-64 h-80 object-cover rounded-tl-lg shadow-2xl m-20px"
               />
+              <div className="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white px-3 py-1 rounded text-sm font-semibold">
+                SECURITY
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

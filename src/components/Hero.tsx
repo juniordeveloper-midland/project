@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className="text-white">
-            <div className="inline-block bg-blue-600 px-4 py-2 rounded text-sm font-medium mb-6">
+            <div className="inline-block bg-blue-900 px-4 py-2 rounded text-sm font-medium mb-6">
               "Welcome to G2OSECURITY"
             </div>
             
@@ -20,10 +20,10 @@ const Hero = () => {
             </h1>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded font-medium transition-all duration-200">
+              <button className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-3xl font-medium transition-all duration-200">
                 Request a Free Quote
               </button>
-              <button className="border-2 border-gray-800 bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded font-medium transition-all duration-200">
+              <button className="border-2 border-gray-800 bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-3xl font-medium transition-all duration-200">
                 Our Security Specialist
               </button>
             </div>
