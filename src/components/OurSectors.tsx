@@ -9,19 +9,19 @@ const OurSectors = () => {
         title: "Static Guarding",
         description:
           "Trained officers provide on-site protection, deterring intruders and safeguarding premises.",
-        imageUrl: "",
+        imageUrl: "https://i.postimg.cc/RhmVmnMv/portrait-male-security-guard-with-radio-station-camera-screens.jpg",
       },
       {
         title: "Mobile Patrols",
         description:
           "Regular patrols secure your premises, checking vulnerable areas and deterring threats.",
-        imageUrl: "",
+        imageUrl: "https://images.pexels.com/photos/8591606/pexels-photo-8591606.jpeg",
       },
       {
         title: "Event Security",
         description:
           "Specialist guards manage entry, monitor crowds, and maintain order at events.",
-        imageUrl: "",
+        imageUrl: "https://images.pexels.com/photos/7714702/pexels-photo-7714702.jpeg",
       },
       {
         title: "CCTV Monitoring",
