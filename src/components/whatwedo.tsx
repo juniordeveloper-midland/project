@@ -3,13 +3,13 @@ import { Zap, Users, Shield, Calendar, MapPin, Settings } from 'lucide-react';
 
 const AboutUs = () => {
   return (
-    <section className="bg-blue-900 py-16 relative overflow-hidden">
+    <section className="bg-white-900 py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-2">What We Do</h2>
+          <h2 className="text-4xl font-bold text-blue-900 mb-2">What We Do</h2>
           <div className="w-32 h-1 bg-white mx-auto mb-8"></div>
-          <p className="text-white text-lg max-w-4xl mx-auto leading-relaxed">
+          <p className="text-blue-900 text-lg max-w-4xl mx-auto leading-relaxed">
             G20 Security delivers trusted, SIA-approved protection with 24/7 nationwide coverage and years of expertise. Our 
             tailored solutions, skilled guards, and guard tracking ensure safety and peace of mind for every client.
           </p>
@@ -18,7 +18,7 @@ const AboutUs = () => {
         {/* Cards Container with White Background */}
         <div className="relative">
           {/* White Background Container */}
-          <div className="bg-white bg-opacity-20 rounded-2xl p-8 mx-auto max-w-6xl">
+          <div className="bg-blue-900  rounded-2xl p-8 mx-auto max-w-6xl">
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* Row 1 */}

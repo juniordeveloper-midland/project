@@ -1,6 +1,7 @@
 import Header from '../components/Header';
 import AboutHero from '../components/abouthero';
 import WhoWeAre from '../components/whoweare';
+import OurStory from '../components/ourstory';
 import WhatWeDo from '../components/whatwedo';
 import Subscribe from '../components/subscribe';
 import Testimonials from '../components/testimonial';
@@ -12,6 +13,7 @@ function about() {
       <Header />
       <AboutHero />
       <WhoWeAre />
+      <OurStory />
       <WhatWeDo />
       <Subscribe />
       <Testimonials />
