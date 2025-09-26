@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import ServiceHero from '../components/servicehero';  
-import OurBlogs from '../components/OurBlogs';
+import ServiceDetail from '../components/servicedetails';
 import Subscribe from '../components/subscribe';
 import Testimonials from '../components/testimonial';
 import Footer from '../components/footer';
@@ -10,7 +10,7 @@ function service() {
     <div className="min-h-screen">
       <Header />
       <ServiceHero />
-      <OurBlogs />
+      <ServiceDetail />
       <Subscribe />
       <Testimonials />
       <Footer />

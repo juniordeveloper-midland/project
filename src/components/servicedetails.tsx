@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
 
-const SectorsDetail = () => {
+const ServiceDetail = () => {
   const services = [
     {
       id: 1,
@@ -102,4 +102,4 @@ const SectorsDetail = () => {
   );
 };
 
-export default SectorsDetail;
+export default ServiceDetail;
