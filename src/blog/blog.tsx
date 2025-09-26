@@ -1,8 +1,8 @@
 import Header from '../components/Header';
+import BlogDetail from '../components/blogdetail';
 import BlogHero from '../components/bloghero';
 import OurBlogs from '../components/OurBlogs';
-import Subscribe from '../components/subscribe';
-import Testimonials from '../components/testimonial';
+
 import Footer from '../components/footer';
 
 function blog() {
@@ -10,9 +10,9 @@ function blog() {
     <div className="min-h-screen">
       <Header />
       <BlogHero />
+      <BlogDetail />
       <OurBlogs />
-      <Subscribe />
-      <Testimonials />
+      
       <Footer />
     </div>
   );
