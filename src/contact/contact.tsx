@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import ContactHero from '../components/contacthero'
+import ContactForm from '../components/contactfilling';
 import OurBlogs from '../components/OurBlogs';
 import Subscribe from '../components/subscribe';
 import Testimonials from '../components/testimonial';
@@ -10,6 +11,7 @@ function contact() {
     <div className="min-h-screen">
       <Header />
       <ContactHero />
+      <ContactForm />
       <OurBlogs />
       <Subscribe />
       <Testimonials />
