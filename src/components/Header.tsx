@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -19,42 +19,42 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-10">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/about"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
             >
               About Us
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/services"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
             >
               Our Services
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/sectors"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
             >
               Sectors
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/blogs"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
             >
               Blogs
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/contact"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
             >
               Contact Us
-            </a>
+            </Link>
           </nav>
         </div>
       </div>
