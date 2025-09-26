@@ -22,9 +22,7 @@ const OurBlogs = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-3 left-3">
-                <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                  Security
-                </span>
+               
               </div>
             </div>
             <div className="p-4">
@@ -45,9 +43,7 @@ const OurBlogs = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-3 left-3">
-                <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                  Security
-                </span>
+                
               </div>
             </div>
             <div className="p-4">
@@ -68,9 +64,7 @@ const OurBlogs = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-3 left-3">
-                <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                  Advice
-                </span>
+               
               </div>
             </div>
             <div className="p-4">
@@ -91,9 +85,7 @@ const OurBlogs = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-3 left-3">
-                <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                  Security
-                </span>
+              
               </div>
             </div>
             <div className="p-4">

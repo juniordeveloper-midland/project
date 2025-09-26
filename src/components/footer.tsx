@@ -25,13 +25,13 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href="#" className="hover:text-blue-700 transition-colors">Home</a></li>
-              <li><a href="#" className="hover:text-blue-700 transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-blue-700 transition-colors">Blogs</a></li>
-              <li><a href="#" className="hover:text-blue-700 transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-blue-700 transition-colors">Terms &amp; Conditions</a></li>
-              <li><a href="#" className="hover:text-blue-700 transition-colors">Privacy policy</a></li>
-              <li><a href="#" className="hover:text-blue-700 transition-colors">FAQ</a></li>
+              <li><a href="/" className="hover:text-blue-700 transition-colors">Home</a></li>
+              <li><a href="/about" className="hover:text-blue-700 transition-colors">About Us</a></li>
+              <li><a href="/blogs" className="hover:text-blue-700 transition-colors">Blogs</a></li>
+              <li><a href="/contact" className="hover:text-blue-700 transition-colors">Contact Us</a></li>
+              <li><a href="/policy" className="hover:text-blue-700 transition-colors">Teams & Conditions</a></li>
+              <li><a href="/policy" className="hover:text-blue-700 transition-colors">Policy</a></li>
+              <li><a href="/faq" className="hover:text-blue-700 transition-colors">FAQ</a></li>
             </ul>
           </div>
 
