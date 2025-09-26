@@ -18,15 +18,8 @@ const WhoWeAre = () => {
               </p>
             </div>
             
-            {/* Lorem ipsum text */}
-            <div className="space-y-4 text-sm leading-relaxed  text-align-center">
-              <p>
-                Lorem ipsum dolor sit amet consectetur. Sed blandit platea amet gravida diam. Et et aliquet leo tristique risus a. Eget nam nec eleifend ut lectus consectetur proin magna. Gravida semper metus bibendum id suscipit turpis amet.
-              </p>
-              <p>
-                Vivamus praesent egestas ullamcorper vehicula mi lobortis. Id maecenas mattis vivamus ac tincidunt ut risus viverra non. Cum ornare eget proin diam proin urna fermentum malesuada risus. Vitae mauris vulputate id libero nisl sociis sed. Ut imperdiet id feugiat rutrum. Tellus proin viverra diam pellentesque placerat. Porta ne
-              </p>
-            </div>
+           
+            
           </div>
 
           {/* Middle Section - Our Mission */}
