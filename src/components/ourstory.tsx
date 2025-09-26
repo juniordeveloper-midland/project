@@ -51,13 +51,11 @@ const OurStory = () => {
           <div className="mt-10 lg:mt-[84px]">
             <div className="relative w-full max-w-[600px] h-[300px] bg-white/10 overflow-hidden mx-auto lg:ml-auto lg:mr-0">
               <img
-                src="https://images.unsplash.com/photo-1601333144134-95d04d0a2fd9?q=80&w=1600&auto=format&fit=crop"
+                src="https://i.postimg.cc/RhmVmnMv/portrait-male-security-guard-with-radio-station-camera-screens.jpg"
                 alt="Security guard with radio"
                 className="w-full h-full object-cover opacity-80"
               />
-              <button className="absolute inset-0 m-auto w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#1f3472] shadow-xl hover:scale-105 transition" aria-label="Play video">
-                <Play className="w-5 h-5" />
-              </button>
+             
             </div>
           </div>
         </div>

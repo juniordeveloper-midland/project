@@ -72,7 +72,7 @@ const BlogDetail = () => {
         excerpt: "Expert security personnel coordinate routes, communicate clearly, and keep people calm to ensure fast and safe evacuations across large facilities.",
         date: "August 30, 2025",
         category: "Security Service, Save People",
-        image: "/api/placeholder/400/250"
+        image: "https://i.postimg.cc/RhmVmnMv/portrait-male-security-guard-with-radio-station-camera-screens.jpg"
       },
       {
         id: 102,
@@ -156,6 +156,7 @@ const BlogDetail = () => {
                     />
                   </div>
                   
+
                   <div className="p-6">
                     <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                       <span className="flex items-center gap-1">

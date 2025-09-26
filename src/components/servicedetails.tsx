@@ -5,42 +5,42 @@ const ServiceDetail = () => {
   const services = [
     {
       id: 1,
-      image: "/api/placeholder/300/200",
+      image: "https://i.postimg.cc/3xvQxxW6/side-view-male-janitor.jpg",
       title: "Static Guarding",
       description: "Our trained security personnel maintain a constant on-site presence, ensuring round-the-clock monitoring and protection. Their unwavering vigilance helps deter threats, prevent incidents, and provide peace of mind at all times.",
       link: "#"
     },
     {
       id: 2,
-      image: "/api/placeholder/300/200",
-      title: "Remote Monitoring Support",
+      image: "https://i.postimg.cc/RZMpjCKK/security-guard-workspace.jpg",
+      title: "Man Guarding ",
       description: "Our security personnel complement CCTV systems by offering an active on-site presence. While cameras monitor remotely, our guards provide immediate response when needed, ensuring faster action and stronger protection. This combination delivers complete security.",
       link: "#"
     },
     {
       id: 3,
-      image: "/api/placeholder/300/200",
-      title: "Emergency Response",
+      image: "https://i.postimg.cc/7YBSZqjg/portrait-male-security-guard-with-radio-station-1.jpg",
+      title: "Private Security",
       description: "Our trained guards are always prepared to act swiftly in any situation. By responding quickly to incidents and taking decisive action, they escalate and ensure fast, effective resolutions, keeping your premises safe and secure. Their proactive approach ensures threats are addressed before they escalate.",
       link: "#"
     },
     {
       id: 4,
-      image: "/api/placeholder/300/200",
+      image: "https://images.pexels.com/photos/8591608/pexels-photo-8591608.jpeg",
       title: "Mobile Patrols",
       description: "Patrol teams conduct regular site checks to maintain security across large or multiple locations. They provide visible deterrent reminders, identify risks, and provide rapid response when incidents occur, ensuring consistent protection and peace of mind. With their mobility and vigilance.",
       link: "#"
     },
     {
       id: 5,
-      image: "/api/placeholder/300/200",
+      image: "https://i.postimg.cc/W3HP4FmB/security-guard-standing-scanning-door.jpg",
       title: "Event Security",
       description: "Experienced guards manage crowd control, access points, and safety at public and private events. Their presence ensures smooth operations, handles emergencies, and provides reassurance for guests. From small gatherings to large-scale events, our team delivers reliable protection.",
       link: "#"
     },
     {
       id: 6,
-      image: "/api/placeholder/300/200",
+      image: "https://i.postimg.cc/k5ZmJRvk/smiling-airport-security-officer-holding-metal-detector-airport-terminal.jpg",
       title: "Access Control",
       description: "Our manpower team closely monitors all entry and exit points to ensure only authorized personnel gain access. This includes checking credentials, monitoring sensitive areas, and maintains site security. With vigilant checks, we create a controlled access environment for your premises.",
       link: "#"
