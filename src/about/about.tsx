@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import AboutHero from '../components/abouthero';
 import WhoWeAre from '../components/whoweare';
-import OurBlogs from '../components/OurBlogs';
+import WhatWeDo from '../components/whatwedo';
 import Subscribe from '../components/subscribe';
 import Testimonials from '../components/testimonial';
 import Footer from '../components/footer';
@@ -12,7 +12,7 @@ function about() {
       <Header />
       <AboutHero />
       <WhoWeAre />
-      <OurBlogs />
+      <WhatWeDo />
       <Subscribe />
       <Testimonials />
       <Footer />

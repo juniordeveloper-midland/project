@@ -59,6 +59,7 @@ const WhoWeAre = () => {
       
     </div>
     
+    
   );
 };
 
