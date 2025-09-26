@@ -119,7 +119,7 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Events manage access and crowd control. We provide bag searches and crowd management, ensuring your event runs smoothly and safely for all attendees.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
                 View More →
               </button>
             </div>
@@ -141,7 +141,7 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Officers verify visiting users entry. We check all visitors and staff entry, maintaining detailed logs and ensuring only authorized personnel access your premises.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
                 View More →
               </button>
             </div>
