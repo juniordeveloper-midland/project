@@ -7,7 +7,7 @@ const Triangle: React.FC<{ className?: string }> = ({ className }) => (
 
 const OurStory = () => {
   return (
-    <div className="bg-[#1f3472] text-white min-h-screen py-14 px-6">
+    <div className="bg-[#2041a5] text-white min-h-screen py-14 px-6">
       <div className="max-w-[1200px] mx-auto">
         {/* Title */}
         <div className="text-center mb-14">
