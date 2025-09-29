@@ -1,6 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const OurServices = () => {
+  const navigate = useNavigate();
+  const handleViewMore = () => {
+    navigate('/services');
+  };
   return (
     <section className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,7 +36,10 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Fixed guards provide constant protection. They deter intruders and control access. Our officers monitor and prevent risks. Reliable presence for total peace of mind.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                onClick={handleViewMore}
+              >
                 View More →
               </button>
             </div>
@@ -53,7 +61,10 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Expert officers trained in conflict resolution, crowd control, and emergency response. Our man guarding services provide professional protection tailored to your specific needs.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                onClick={handleViewMore}
+              >
                 View More →
               </button>
             </div>
@@ -75,7 +86,10 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Discreet security solutions and close protection services for high-profile individuals, executives, and VIPs requiring personal protection.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                onClick={handleViewMore}
+              >
                 View More →
               </button>
             </div>
@@ -97,7 +111,10 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Regular drive-by and patrol visits. Mobile Security patrols are ideal for checking multiple sites, providing visible deterrent and rapid response capabilities.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                onClick={handleViewMore}
+              >
                 View More →
               </button>
             </div>
@@ -119,7 +136,10 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Events manage access and crowd control. We provide bag searches and crowd management, ensuring your event runs smoothly and safely for all attendees.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                onClick={handleViewMore}
+              >
                 View More →
               </button>
             </div>
@@ -141,7 +161,10 @@ const OurServices = () => {
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Officers verify visiting users entry. We check all visitors and staff entry, maintaining detailed logs and ensuring only authorized personnel access your premises.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center">
+              <button
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                onClick={handleViewMore}
+              >
                 View More →
               </button>
             </div>
