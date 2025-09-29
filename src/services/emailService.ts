@@ -13,7 +13,14 @@ export class EmailService {
 
   private constructor() {
     // Set the API endpoint for email sending
-    this.apiEndpoint = 'http://localhost:3001/api/subscribe';
+    // Prefer explicit env, fall back to localhost in dev, and same-origin in prod
+    const envBase = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_BASE_URL) || '';
+    const isBrowser = typeof window !== 'undefined';
+    const isLocalhost = isBrowser && window.location.hostname === 'localhost';
+    const baseUrl = envBase
+      || (isLocalhost ? 'http://localhost:3001' : (isBrowser ? window.location.origin : ''));
+
+    this.apiEndpoint = `${baseUrl}/api/subscribe`;
   }
 
   public static getInstance(): EmailService {
@@ -61,7 +68,9 @@ export class EmailService {
    */
   public async testConnection(): Promise<boolean> {
     try {
-      const response = await fetch('http://localhost:3001/api/health');
+      // Derive health endpoint from the same base as apiEndpoint
+      const healthEndpoint = this.apiEndpoint.replace('/api/subscribe', '/api/health');
+      const response = await fetch(healthEndpoint);
       return response.ok;
     } catch (error) {
       console.error('Connection test failed:', error);

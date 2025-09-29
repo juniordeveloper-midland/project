@@ -1,9 +1,13 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 dotenv.config();
 
@@ -12,10 +16,16 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret';
+const CREDS_PATH = path.join(process.cwd(), 'server', 'admin.creds.json');
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Email configuration
@@ -83,6 +93,86 @@ ${COMPANY_NAME} Team
 ---
 To unsubscribe, simply reply to this email with "UNSUBSCRIBE" in the subject line.`,
   replyTo: ADMIN_EMAIL
+});
+
+// --- AUTH STORAGE HELPERS ---
+function readCreds() {
+  try {
+    if (!fs.existsSync(CREDS_PATH)) {
+      const defaultHash = bcrypt.hashSync('admin123', 10);
+      const initial = { email: 'admin@example.com', passwordHash: defaultHash };
+      fs.writeFileSync(CREDS_PATH, JSON.stringify(initial, null, 2));
+      return initial;
+    }
+    const raw = fs.readFileSync(CREDS_PATH, 'utf-8');
+    return JSON.parse(raw);
+  } catch (e) {
+    console.error('Failed to read creds file:', e);
+    const fallback = { email: 'admin@example.com', passwordHash: bcrypt.hashSync('admin123', 10) };
+    return fallback;
+  }
+}
+
+function writeCreds(nextCreds) {
+  fs.writeFileSync(CREDS_PATH, JSON.stringify(nextCreds, null, 2));
+}
+
+function signToken(payload) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
+}
+
+function authMiddleware(req, res, next) {
+  const token = req.cookies?.token;
+  if (!token) return res.status(401).json({ success: false, message: 'Unauthorized' });
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (_) {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  }
+}
+
+// --- AUTH ROUTES ---
+app.post('/api/auth/login', (req, res) => {
+  const { email, password } = req.body || {};
+  if (!email || !password) return res.status(400).json({ success: false, message: 'Email and password required' });
+  const creds = readCreds();
+  const isEmailMatch = email.trim().toLowerCase() === creds.email.trim().toLowerCase();
+  const isPasswordMatch = bcrypt.compareSync(password, creds.passwordHash);
+  if (!isEmailMatch || !isPasswordMatch) {
+    return res.status(401).json({ success: false, message: 'Invalid credentials' });
+  }
+  const token = signToken({ email: creds.email });
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 2 * 60 * 60 * 1000
+  });
+  return res.json({ success: true, message: 'Logged in' });
+});
+
+app.post('/api/auth/logout', (req, res) => {
+  res.clearCookie('token');
+  return res.json({ success: true });
+});
+
+app.get('/api/auth/me', authMiddleware, (req, res) => {
+  return res.json({ success: true, user: { email: req.user.email } });
+});
+
+app.post('/api/auth/change-credentials', authMiddleware, (req, res) => {
+  const { currentPassword, newEmail, newPassword } = req.body || {};
+  const creds = readCreds();
+  const valid = bcrypt.compareSync(currentPassword || '', creds.passwordHash);
+  if (!valid) return res.status(401).json({ success: false, message: 'Current password invalid' });
+  const updated = {
+    email: newEmail && newEmail.trim() ? newEmail.trim().toLowerCase() : creds.email,
+    passwordHash: newPassword && newPassword.length >= 6 ? bcrypt.hashSync(newPassword, 10) : creds.passwordHash
+  };
+  writeCreds(updated);
+  return res.json({ success: true, user: { email: updated.email } });
 });
 
 // Routes
