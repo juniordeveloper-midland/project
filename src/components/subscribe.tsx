@@ -39,7 +39,7 @@ const Subscribe = () => {
       className="relative bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(7, 15, 25, 0.65), rgba(7, 15, 25, 0.65)), url('/images/subscribe.jpeg')",
+          "linear-gradient(rgba(7, 15, 25, 0.65), rgba(7, 15, 25, 0.65)), url('/images/monitoring.jpg')",
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
