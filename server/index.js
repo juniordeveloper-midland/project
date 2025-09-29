@@ -37,7 +37,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail', // You can change this to your email provider
   auth: {
     user: process.env.EMAIL_USER || 'developer01@midlandmarketing.in',
-    pass: process.env.EMAIL_PASS || 'your-app-password' // Use App Password for Gmail
+    pass: process.env.EMAIL_PASS || 'Liondev@2025!' // Use App Password for Gmail
   }
 });
 

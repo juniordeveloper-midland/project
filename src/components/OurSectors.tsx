@@ -1,5 +1,3 @@
- 
-
 import { useEffect, useMemo, useRef, useState } from "react";
 
 const OurSectors = () => {
@@ -48,10 +46,13 @@ const OurSectors = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
   const viewportRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  
+  // Drag state
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
-  const [dragDeltaX, setDragDeltaX] = useState(0);
-  const [dragStartIndex, setDragStartIndex] = useState(0);
+  const [dragCurrentX, setDragCurrentX] = useState(0);
+  const [dragStartTranslateX, setDragStartTranslateX] = useState(0);
 
   useEffect(() => {
     const updateItemsPerView = () => {
@@ -73,44 +74,90 @@ const OurSectors = () => {
     }
   }, [itemsPerView, sectors.length, currentIndex]);
 
-  const getCardWidthPx = (): number => {
-    const viewport = viewportRef.current;
-    if (!viewport) return 0;
-    const viewportWidth = viewport.clientWidth;
+  const getSlideWidth = () => {
+    if (!viewportRef.current) return 0;
+    const viewportWidth = viewportRef.current.clientWidth;
     return viewportWidth / itemsPerView;
   };
 
-  const onPointerDown: React.PointerEventHandler<HTMLDivElement> = (e) => {
-    const container = e.currentTarget;
-    container.setPointerCapture?.(e.pointerId);
+  const getMaxTranslateX = () => {
+    const slideWidth = getSlideWidth();
+    const maxSlides = Math.max(0, sectors.length - itemsPerView);
+    return maxSlides * slideWidth;
+  };
+
+  const getCurrentTranslateX = () => {
+    const slideWidth = getSlideWidth();
+    return currentIndex * slideWidth;
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    target.setPointerCapture(e.pointerId);
+    
     setIsDragging(true);
     setDragStartX(e.clientX);
-    setDragDeltaX(0);
-    setDragStartIndex(currentIndex);
+    setDragCurrentX(e.clientX);
+    setDragStartTranslateX(getCurrentTranslateX());
+    
+    e.preventDefault();
   };
 
-  const onPointerMove: React.PointerEventHandler<HTMLDivElement> = (e) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging) return;
-    setDragDeltaX(e.clientX - dragStartX);
+    
+    setDragCurrentX(e.clientX);
+    e.preventDefault();
   };
 
-  const onPointerUpOrLeave: React.PointerEventHandler<HTMLDivElement> = () => {
+  const handlePointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isDragging) return;
-    const cardWidthPx = getCardWidthPx();
-    const deltaIndex = cardWidthPx > 0 ? dragDeltaX / cardWidthPx : 0;
-    const rawIndex = dragStartIndex - deltaIndex;
+    
+    const target = e.currentTarget;
+    target.releasePointerCapture(e.pointerId);
+    
+    const dragDistance = dragCurrentX - dragStartX;
+    const slideWidth = getSlideWidth();
+    
+    // Calculate which slide we should snap to
+    const currentTranslateX = dragStartTranslateX - dragDistance;
+    const targetIndex = Math.round(currentTranslateX / slideWidth);
+    
+    // Apply bounds
     const maxIndex = Math.max(0, sectors.length - itemsPerView);
-    const snappedIndex = Math.min(maxIndex, Math.max(0, Math.round(rawIndex)));
-    setCurrentIndex(snappedIndex);
+    const clampedIndex = Math.min(maxIndex, Math.max(0, targetIndex));
+    
+    setCurrentIndex(clampedIndex);
     setIsDragging(false);
-    setDragDeltaX(0);
+    setDragStartX(0);
+    setDragCurrentX(0);
+    setDragStartTranslateX(0);
   };
 
-  const cardWidthPercent = 100 / itemsPerView; // 100% for 1 per view, ~33.333% for 3 per view
-  const cardWidthPx = getCardWidthPx();
-  const deltaIndexWhileDragging = cardWidthPx > 0 ? dragDeltaX / cardWidthPx : 0;
-  const effectiveIndex = isDragging ? dragStartIndex - deltaIndexWhileDragging : currentIndex;
-  const translatePercent = effectiveIndex * cardWidthPercent;
+  // Calculate the current transform
+  const getTransform = () => {
+    if (isDragging) {
+      const dragDistance = dragCurrentX - dragStartX;
+      const newTranslateX = dragStartTranslateX - dragDistance;
+      const maxTranslateX = getMaxTranslateX();
+      
+      // Allow slight overscroll for better UX, but with resistance
+      let finalTranslateX = newTranslateX;
+      if (newTranslateX < 0) {
+        finalTranslateX = newTranslateX * 0.3; // Resistance when dragging past start
+      } else if (newTranslateX > maxTranslateX) {
+        const excess = newTranslateX - maxTranslateX;
+        finalTranslateX = maxTranslateX + (excess * 0.3); // Resistance when dragging past end
+      }
+      
+      return `translateX(-${finalTranslateX}px)`;
+    } else {
+      const translateX = getCurrentTranslateX();
+      return `translateX(-${translateX}px)`;
+    }
+  };
+
+  const cardWidthPercent = 100 / itemsPerView;
 
   return (
     <section className="relative">
@@ -131,18 +178,21 @@ const OurSectors = () => {
           {/* Slider viewport */}
           <div
             ref={viewportRef}
-            className={`overflow-hidden ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+            className={`overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
             style={{ touchAction: "pan-y" }}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUpOrLeave}
-            onPointerLeave={onPointerUpOrLeave}
-            onPointerCancel={onPointerUpOrLeave}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerEnd}
+            onPointerCancel={handlePointerEnd}
           >
             {/* Slider track */}
             <div
-              className={`flex gap-6 ${isDragging ? "transition-none" : "transition-transform duration-500 ease-out"}`}
-              style={{ transform: `translateX(-${translatePercent}%)` }}
+              ref={trackRef}
+              className={`flex gap-6 ${isDragging ? "" : "transition-transform duration-300 ease-out"}`}
+              style={{ 
+                transform: getTransform(),
+                willChange: 'transform'
+              }}
             >
               {sectors.map((sector, index) => (
                 <div
@@ -151,7 +201,12 @@ const OurSectors = () => {
                   style={{ width: `${cardWidthPercent}%` }}
                 >
                   <div className="h-56">
-                    <img src={sector.imageUrl} alt={sector.title} className="w-full h-full object-cover" />
+                    <img 
+                      src={sector.imageUrl} 
+                      alt={sector.title} 
+                      className="w-full h-full object-cover select-none" 
+                      draggable={false}
+                    />
                   </div>
                   <div className="bg-gray-100 p-5">
                     <h3 className="text-base font-semibold text-gray-900 mb-2">{sector.title}</h3>
@@ -162,12 +217,16 @@ const OurSectors = () => {
             </div>
           </div>
 
-          {/* Range of slides indicator (optional) */}
+          {/* Slide indicators */}
           <div className="flex justify-center items-center gap-2 mt-6 mb-6">
             {Array.from({ length: Math.max(1, sectors.length - itemsPerView + 1) }).map((_, dotIndex) => (
-              <span
+              <button
                 key={dotIndex}
-                className={`inline-block w-2 h-2 rounded-full ${dotIndex === currentIndex ? "bg-gray-700" : "bg-gray-300"}`}
+                onClick={() => setCurrentIndex(dotIndex)}
+                className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                  dotIndex === currentIndex ? "bg-gray-700" : "bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to slide ${dotIndex + 1}`}
               />
             ))}
           </div>

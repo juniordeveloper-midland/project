@@ -81,11 +81,11 @@ To unsubscribe, simply reply to this email with "UNSUBSCRIBE" in the subject lin
     });
   }
 
- 
+
   private createMailtoUrl(data: EmailData): string {
     const encodedSubject = encodeURIComponent(data.subject);
     const encodedBody = encodeURIComponent(data.body);
-    
+
     return `mailto:${data.to}?subject=${encodedSubject}&body=${encodedBody}`;
   }
 
