@@ -161,9 +161,10 @@ const OurSectors = () => {
 
   return (
     <section className="relative">
-      <div className="bg-blue-700 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+      {/* Background with gradient that extends behind cards */}
+      <div className="bg-gradient-to-b from-blue-700 via-blue-600 to-blue-500 pb-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-3">Our Sectors</h2>
             <p className="text-white text-lg max-w-4xl mx-auto leading-relaxed">
               G20 Security delivers tailored security services across industries, from construction sites to retail and more. With
@@ -173,63 +174,73 @@ const OurSectors = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="relative">
-          {/* Slider viewport */}
-          <div
-            ref={viewportRef}
-            className={`overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
-            style={{ touchAction: "pan-y" }}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerEnd}
-            onPointerCancel={handlePointerEnd}
-          >
-            {/* Slider track */}
+      {/* Cards positioned to overlap the blue background */}
+      <div className="relative -mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative">
+            {/* Slider viewport */}
             <div
-              ref={trackRef}
-              className={`flex gap-6 ${isDragging ? "" : "transition-transform duration-300 ease-out"}`}
-              style={{ 
-                transform: getTransform(),
-                willChange: 'transform'
-              }}
+              ref={viewportRef}
+              className={`overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+              style={{ touchAction: "pan-y" }}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerEnd}
+              onPointerCancel={handlePointerEnd}
             >
-              {sectors.map((sector, index) => (
-                <div
-                  key={sector.title + index}
-                  className="shrink-0 rounded-2xl shadow-xl overflow-hidden bg-white"
-                  style={{ width: `${cardWidthPercent}%` }}
-                >
-                  <div className="h-56">
-                    <img 
-                      src={sector.imageUrl} 
-                      alt={sector.title} 
-                      className="w-full h-full object-cover select-none" 
-                      draggable={false}
-                    />
+              {/* Slider track */}
+              <div
+                ref={trackRef}
+                className={`flex gap-6 ${isDragging ? "" : "transition-transform duration-300 ease-out"}`}
+                style={{ 
+                  transform: getTransform(),
+                  willChange: 'transform'
+                }}
+              >
+                {sectors.map((sector, index) => (
+                  <div
+                    key={sector.title + index}
+                    className="shrink-0 rounded-2xl shadow-xl overflow-hidden bg-white"
+                    style={{ width: `${cardWidthPercent}%` }}
+                  >
+                    <div className="h-56">
+                      <img 
+                        src={sector.imageUrl} 
+                        alt={sector.title} 
+                        className="w-full h-full object-cover select-none" 
+                        draggable={false}
+                      />
+                    </div>
+                    <div className="bg-gray-100 p-5">
+                      <h3 className="text-base font-semibold text-gray-900 mb-2">{sector.title}</h3>
+                      <p className="text-xs text-gray-600 leading-relaxed">{sector.description}</p>
+                    </div>
                   </div>
-                  <div className="bg-gray-100 p-5">
-                    <h3 className="text-base font-semibold text-gray-900 mb-2">{sector.title}</h3>
-                    <p className="text-xs text-gray-600 leading-relaxed">{sector.description}</p>
-                  </div>
-                </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Slide indicators */}
+            <div className="flex justify-center items-center gap-2 mt-6 mb-6">
+              {Array.from({ length: Math.max(1, sectors.length - itemsPerView + 1) }).map((_, dotIndex) => (
+                <button
+                  key={dotIndex}
+                  onClick={() => setCurrentIndex(dotIndex)}
+                  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                    dotIndex === currentIndex ? "bg-gray-700" : "bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  aria-label={`Go to slide ${dotIndex + 1}`}
+                />
               ))}
             </div>
           </div>
-
-          {/* Slide indicators */}
-          <div className="flex justify-center items-center gap-2 mt-6 mb-6">
-            {Array.from({ length: Math.max(1, sectors.length - itemsPerView + 1) }).map((_, dotIndex) => (
-              <button
-                key={dotIndex}
-                onClick={() => setCurrentIndex(dotIndex)}
-                className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                  dotIndex === currentIndex ? "bg-gray-700" : "bg-gray-300 hover:bg-gray-400"
-                }`}
-                aria-label={`Go to slide ${dotIndex + 1}`}
-              />
-            ))}
-          </div>
+        </div>
+      </div>
+      
+      {/* White background section for the bottom part */}
+      <div className="bg-white pt-16 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Additional content can go here if needed */}
         </div>
       </div>
     </section>
