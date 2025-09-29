@@ -9,37 +9,37 @@ const OurSectors = () => {
         title: "Static Guarding",
         description:
           "Trained officers provide on-site protection, deterring intruders and safeguarding premises.",
-        imageUrl: "/public/images/Static Guarding2.jpg",
+        imageUrl: "/images/Static Guarding2.jpg",
       },
       {
         title: "Mobile Patrols",
         description:
           "Regular patrols secure your premises, checking vulnerable areas and deterring threats.",
-        imageUrl: "/public/images/mobile patrol2.jpg",
+        imageUrl: "/images/mobile patrol2.jpg",
       },
       {
         title: "Event Security",
         description:
           "Specialist guards manage entry, monitor crowds, and maintain order at events.",
-        imageUrl: "/public/images/security1.jpg",
+        imageUrl: "/images/security1.jpg",
       },
       {
         title: "CCTV Monitoring",
         description:
           "Proactive camera monitoring to quickly detect and respond to incidents.",
-        imageUrl: "/public/images/monitoring.jpg",
+        imageUrl: "/images/monitoring.jpg",
       },
       {
         title: "Access Control",
         description:
           "Manage and restrict entry with professional access control solutions.",
-        imageUrl: "/public/images/walkitalki.jpg",
+        imageUrl: "/images/walkitalki.jpg",
       },
       {
         title: "Retail Security",
         description:
           "Loss prevention and customer safety with trained retail security staff.",
-        imageUrl: "/public/images/security2.jpg",
+        imageUrl: "/images/security2.jpg",
       },
     ],
     []
