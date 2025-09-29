@@ -1,6 +1,7 @@
 export type User = { email: string };
 
-const API = '/api/auth';
+const API_BASE = (import.meta as any).env?.DEV ? 'http://localhost:3001' : '';
+const API = `${API_BASE}/api/auth`;
 
 export async function login(email: string, password: string): Promise<void> {
   const res = await fetch(`${API}/login`, {
@@ -12,6 +13,19 @@ export async function login(email: string, password: string): Promise<void> {
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
     throw new Error(data?.message || 'Login failed');
+  }
+}
+
+export async function googleLogin(idToken: string): Promise<void> {
+  const res = await fetch(`/api/auth/google`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ idToken })
+  });
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data?.message || 'Google login failed');
   }
 }
 

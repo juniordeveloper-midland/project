@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { OAuth2Client } from 'google-auth-library';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret';
 const CREDS_PATH = path.join(process.cwd(), 'server', 'admin.creds.json');
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || process.env.VITE_GOOGLE_CLIENT_ID || '';
+const googleClient = GOOGLE_CLIENT_ID ? new OAuth2Client(GOOGLE_CLIENT_ID) : null;
 
 // Middleware
 app.use(cors({
@@ -151,6 +154,36 @@ app.post('/api/auth/login', (req, res) => {
     maxAge: 2 * 60 * 60 * 1000
   });
   return res.json({ success: true, message: 'Logged in' });
+});
+
+// Google Sign-In: verify ID token and match email with stored admin email
+app.post('/api/auth/google', async (req, res) => {
+  try {
+    if (!googleClient) return res.status(500).json({ success: false, message: 'Google client not configured' });
+    const { idToken } = req.body || {};
+    if (!idToken) return res.status(400).json({ success: false, message: 'idToken required' });
+
+    const ticket = await googleClient.verifyIdToken({ idToken, audience: GOOGLE_CLIENT_ID });
+    const payload = ticket.getPayload();
+    const googleEmail = payload?.email?.toLowerCase();
+    if (!googleEmail) return res.status(401).json({ success: false, message: 'Google email not present' });
+
+    const creds = readCreds();
+    const isEmailMatch = googleEmail === creds.email.trim().toLowerCase();
+    if (!isEmailMatch) return res.status(401).json({ success: false, message: 'Unauthorized email' });
+
+    const token = signToken({ email: creds.email });
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 2 * 60 * 60 * 1000
+    });
+    return res.json({ success: true, message: 'Logged in with Google' });
+  } catch (e) {
+    console.error('Google login error:', e);
+    return res.status(401).json({ success: false, message: 'Invalid Google token' });
+  }
 });
 
 app.post('/api/auth/logout', (req, res) => {
