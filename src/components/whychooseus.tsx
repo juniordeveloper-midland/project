@@ -72,7 +72,7 @@ export default function WhyChooseUs() {
             {/* Top Image - Replace with your security officer image */}
             <div className="relative">
               <img 
-                src="/public/images/walkitalki.jpg" 
+                src="/images/walkitalki.jpg" 
                 alt="Security Officer" 
                 className="w-full h-44 object-cover rounded-2xl"
               />
@@ -81,7 +81,7 @@ export default function WhyChooseUs() {
             {/* Middle Image - Replace with your security guard image */}
             <div className="relative">
               <img 
-                src="/public/images/Man Gaurding3.jpg" 
+                src="/images/Man Gaurding3.jpg" 
                 alt="Security Guard in Action" 
                 className="w-full h-40 object-cover rounded-2xl"
               />
@@ -90,7 +90,7 @@ export default function WhyChooseUs() {
             {/* Bottom Image - Replace with your construction security image */}
             <div className="relative">
               <img 
-                src="/public/images/mobile patrol2.jpg" 
+                src="/images/mobile patrol2.jpg" 
                 alt="Construction Site Security" 
                 className="w-full h-48 object-cover rounded-2xl"
               />

@@ -17,7 +17,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="/public/images/Man Gaurding3.jpg" 
+                src="/images/Man Gaurding3.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />
@@ -38,7 +38,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="/public/images/mobile security3.jpg" 
+                src="/images/mobile security3.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />
@@ -59,7 +59,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="/public/images/Private Security.jpg" 
+                src="/images/Private Security.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />
@@ -80,7 +80,7 @@ const OurBlogs = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="relative h-48 bg-gray-200">
               <img 
-                src="/public/images/Man Guarding 2.jpg" 
+                src="/images/Man Guarding 2.jpg" 
                 alt="Security Blog"
                 className="w-full h-full object-cover"
               />

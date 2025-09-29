@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/public/images/G20Logo.jpg"
+                src="/images/G20Logo.jpg"
                 alt="G20Security Logo"
                 className="h-9 w-9 object-contain"
               />

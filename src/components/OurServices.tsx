@@ -20,7 +20,7 @@ const OurServices = () => {
             <div className="p-4 pt-0">
               <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
                 <img 
-                  src="/public/images/Static Guarding.jpg" 
+                  src="/images/Static Guarding.jpg" 
                   alt="Static Guarding - Professional security guard in high-visibility uniform"
                   className="w-full h-full object-cover object-center"
                 />
@@ -42,7 +42,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
               <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
                 <img 
-                  src="/public/images/Man Guarding.jpg" 
+                  src="/images/Man Guarding.jpg" 
                   alt="Man Guarding - Professional security officer in tactical gear"
                   className="w-full h-full object-cover object-center"
                 />
@@ -64,7 +64,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="/public/images/Private Security.jpg" 
+                src="/images/Private Security.jpg" 
                 alt="Private Security - Professional security personnel with radio equipment"
                 className="w-full h-full object-cover object-center"
               />
@@ -86,7 +86,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="/public/images/Mobile Patrols.jpg" 
+                src="/images/Mobile Patrols.jpg" 
                 alt="Mobile Patrols - Security patrol vehicle and officer"
                 className="w-full h-full object-cover object-center"
               />
@@ -108,7 +108,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="/public/images/Event Security.jpg" 
+                src="/images/Event Security.jpg" 
                 alt="Event Security - Security officers at event venue entrance"
                 className="w-full h-full object-cover object-center"
               />
@@ -130,7 +130,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="/public/images/Access Control.jpg" 
+                src="/images/Access Control.jpg" 
                 alt="Access Control - Professional security officer at building entrance"
                 className="w-full h-full object-cover object-center"
               />

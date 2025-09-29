@@ -14,7 +14,7 @@ const Header = () => {
           {/* Logo + Brand - Left Side */}
           <div className="flex items-center space-x-2 flex-shrink-0">
             <img
-              src="https://i.postimg.cc/8P6cvDY8/g20.jpg"
+              src="/images/g20.jpg"
               alt="G20 Security Logo"
               className="h-10 w-auto"
             />

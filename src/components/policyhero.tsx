@@ -7,7 +7,7 @@ const policyhero = () => {
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('/public/images/herocity.jpg')",
+            "url('/images/herocity.jpg')",
         }}
       />
       <div className="absolute inset-0 bg-[#cacaca] bg-opacity-40" />

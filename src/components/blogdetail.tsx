@@ -72,7 +72,7 @@ const BlogDetail = () => {
         excerpt: "Expert security personnel coordinate routes, communicate clearly, and keep people calm to ensure fast and safe evacuations across large facilities.",
         date: "August 30, 2025",
         category: "Security Service, Save People",
-        image: "/public/images/walkitalki.jpg"
+  image: "/images/walkitalki.jpg"
       },
       {
         id: 102,
@@ -80,7 +80,7 @@ const BlogDetail = () => {
         excerpt: "Clear post orders reduce confusion, align response protocols, and make every shift consistent and accountable.",
         date: "August 22, 2025",
         category: "Operations, Best Practices",
-        image: "/public/images/monitoring.jpg"
+  image: "/images/monitoring.jpg"
       }
     ],
     2: [

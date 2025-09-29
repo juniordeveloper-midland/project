@@ -29,7 +29,7 @@ const Testimonials: React.FC = () => {
                 <p className="text-[12px] text-[#7482a6]">Operations Manager.</p>
               </div>
               <img
-                src="/public/images/review1.jpg"
+                src="/images/review1.jpg"
                 alt="Sarah Thompson"
                 className="h-10 w-10 rounded-full object-cover border-2 border-white shadow"
               />
@@ -50,7 +50,7 @@ const Testimonials: React.FC = () => {
                 <p className="text-[12px] text-[#7482a6]">Warehouse Manager.</p>
               </div>
               <img
-                src="/public/images/review2.jpg"
+                src="/images/review2.jpg"
                 alt="Daniel K"
                 className="h-10 w-10 rounded-full object-cover border-2 border-white shadow"
               />
@@ -70,7 +70,7 @@ const Testimonials: React.FC = () => {
                 <p className="text-[12px] text-[#7482a6]">Facilities Manager.</p>
               </div>
               <img
-                src="/public/images/review3.jpg"
+                src="/images/review3.jpg"
                 alt="Aisha K"
                 className="h-10 w-10 rounded-full object-cover border-2 border-white shadow"
               />
