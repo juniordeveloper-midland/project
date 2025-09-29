@@ -37,7 +37,7 @@ const WhoWeAre = () => {
         {/* Bottom row: description + image anchored to baseline */}
         <div className="relative mt-12 lg:mt-16 pb-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-8 items-end">
-            <div className="space-y-6 text-base md:text-lg leading-relaxed max-w-none lg:pr-6 text-left">
+            <div className="space-y-6 text-base md:text-lg leading-relaxed max-w-none lg:pr-6 text-left justify-center">
               <p>
                 Lorem ipsum dolor sit amet consectetur. Sed blandit platea amet gravida diam. Et at aliquet leo tristique risus a. Eget nam nec eleifend ut lectus consectetur proin magna. Gravida semper metus bibendum id suscipit turpis amet.
               </p>
