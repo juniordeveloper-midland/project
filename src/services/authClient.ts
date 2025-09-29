@@ -1,6 +1,6 @@
 export type User = { email: string };
 
-const API_BASE = (import.meta as any).env?.DEV ? 'http://localhost:3001' : '';
+const API_BASE = (import.meta as any).env?.VITE_API_BASE || ((import.meta as any).env?.DEV ? 'http://localhost:3001' : '');
 const API = `${API_BASE}/api/auth`;
 
 export async function login(email: string, password: string): Promise<void> {

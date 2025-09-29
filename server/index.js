@@ -17,6 +17,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || '';
 const JWT_SECRET = process.env.JWT_SECRET || 'change-this-secret';
 const CREDS_PATH = path.join(process.cwd(), 'server', 'admin.creds.json');
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || process.env.VITE_GOOGLE_CLIENT_ID || '';
@@ -24,7 +25,7 @@ const googleClient = GOOGLE_CLIENT_ID ? new OAuth2Client(GOOGLE_CLIENT_ID) : nul
 
 // Middleware
 app.use(cors({
-  origin: true,
+  origin: (origin, cb) => cb(null, FRONTEND_ORIGIN || origin || true),
   credentials: true
 }));
 app.use(express.json());
@@ -149,8 +150,8 @@ app.post('/api/auth/login', (req, res) => {
   const token = signToken({ email: creds.email });
   res.cookie('token', token, {
     httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    sameSite: FRONTEND_ORIGIN ? 'none' : 'lax',
+    secure: FRONTEND_ORIGIN ? true : process.env.NODE_ENV === 'production',
     maxAge: 2 * 60 * 60 * 1000
   });
   return res.json({ success: true, message: 'Logged in' });
@@ -175,8 +176,8 @@ app.post('/api/auth/google', async (req, res) => {
     const token = signToken({ email: creds.email });
     res.cookie('token', token, {
       httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
+      sameSite: FRONTEND_ORIGIN ? 'none' : 'lax',
+      secure: FRONTEND_ORIGIN ? true : process.env.NODE_ENV === 'production',
       maxAge: 2 * 60 * 60 * 1000
     });
     return res.json({ success: true, message: 'Logged in with Google' });
