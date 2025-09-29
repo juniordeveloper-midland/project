@@ -20,7 +20,7 @@ const OurServices = () => {
             <div className="p-4 pt-0">
               <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
                 <img 
-                  src="https://i.postimg.cc/3xvQxxW6/side-view-male-janitor.jpg" 
+                  src="/public/images/Static Guarding.jpg" 
                   alt="Static Guarding - Professional security guard in high-visibility uniform"
                   className="w-full h-full object-cover object-center"
                 />
@@ -42,7 +42,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
               <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
                 <img 
-                  src="https://i.postimg.cc/RZMpjCKK/security-guard-workspace.jpg" 
+                  src="/public/images/Man Guarding.jpg" 
                   alt="Man Guarding - Professional security officer in tactical gear"
                   className="w-full h-full object-cover object-center"
                 />
@@ -64,7 +64,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="https://i.postimg.cc/7YBSZqjg/portrait-male-security-guard-with-radio-station-1.jpg" 
+                src="/public/images/Private Security.jpg" 
                 alt="Private Security - Professional security personnel with radio equipment"
                 className="w-full h-full object-cover object-center"
               />
@@ -86,7 +86,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="https://images.pexels.com/photos/8591608/pexels-photo-8591608.jpeg" 
+                src="/public/images/Mobile Patrols.jpg" 
                 alt="Mobile Patrols - Security patrol vehicle and officer"
                 className="w-full h-full object-cover object-center"
               />
@@ -108,7 +108,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="https://i.postimg.cc/W3HP4FmB/security-guard-standing-scanning-door.jpg" 
+                src="/public/images/Event Security.jpg" 
                 alt="Event Security - Security officers at event venue entrance"
                 className="w-full h-full object-cover object-center"
               />
@@ -130,7 +130,7 @@ const OurServices = () => {
             <div className="p-4 pt-6">
             <div className="h-70 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden rounded-2xl shadow-lg">
               <img 
-                src="https://i.postimg.cc/k5ZmJRvk/smiling-airport-security-officer-holding-metal-detector-airport-terminal.jpg" 
+                src="/public/images/Access Control.jpg" 
                 alt="Access Control - Professional security officer at building entrance"
                 className="w-full h-full object-cover object-center"
               />

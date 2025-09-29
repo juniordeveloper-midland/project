@@ -51,7 +51,7 @@ const OurStory = () => {
           <div className="mt-10 lg:mt-[84px]">
             <div className="relative w-full max-w-[600px] h-[300px] bg-white/10 overflow-hidden mx-auto lg:ml-auto lg:mr-0">
               <img
-                src="https://i.postimg.cc/RhmVmnMv/portrait-male-security-guard-with-radio-station-camera-screens.jpg"
+                src="/public/images/walkitalki.jpg"
                 alt="Security guard with radio"
                 className="w-full h-full object-cover opacity-80"
               />

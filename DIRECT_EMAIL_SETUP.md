@@ -92,3 +92,4 @@ You can customize the email templates in `src/services/directEmailService.ts`:
 ## Support
 
 This solution is completely self-contained and requires no external services or ongoing maintenance.
+

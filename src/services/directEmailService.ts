@@ -1,5 +1,4 @@
-// Direct Email Service - No third-party dependencies
-// This service uses mailto: protocol and form submission to send emails directly
+
 
 export interface EmailData {
   to: string;
@@ -12,8 +11,8 @@ export class DirectEmailService {
   private adminEmail: string;
 
   private constructor() {
-    // Set your email address here
-    this.adminEmail = 'developer01@midlandmarketing.in'; // Replace with your actual email
+   
+    this.adminEmail = 'developer01@midlandmarketing.in'; 
   }
 
   public static getInstance(): DirectEmailService {
@@ -31,9 +30,7 @@ export class DirectEmailService {
     return this.adminEmail;
   }
 
-  /**
-   * Creates a mailto: URL for subscription notification
-   */
+ 
   public createSubscriptionMailtoUrl(subscriberEmail: string): string {
     const subject = 'New Newsletter Subscription - G20 Security';
     const body = `New Newsletter Subscription
@@ -54,9 +51,7 @@ Please reply to this email to confirm receipt.`;
     });
   }
 
-  /**
-   * Creates a mailto: URL for subscriber confirmation
-   */
+  
   public createConfirmationMailtoUrl(subscriberEmail: string): string {
     const subject = 'Welcome to G20 Security Newsletter!';
     const body = `Dear Subscriber,
@@ -86,9 +81,7 @@ To unsubscribe, simply reply to this email with "UNSUBSCRIBE" in the subject lin
     });
   }
 
-  /**
-   * Creates a mailto: URL with proper encoding
-   */
+ 
   private createMailtoUrl(data: EmailData): string {
     const encodedSubject = encodeURIComponent(data.subject);
     const encodedBody = encodeURIComponent(data.body);
@@ -175,3 +168,4 @@ This is an automated notification from your website newsletter subscription form
 
 // Export singleton instance
 export const directEmailService = DirectEmailService.getInstance();
+

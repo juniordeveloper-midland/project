@@ -1,5 +1,4 @@
-// Email Service with Node.js Backend
-// This service sends emails through a Node.js Express server for reliable delivery
+
 
 export interface EmailResponse {
   success: boolean;

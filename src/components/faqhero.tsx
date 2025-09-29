@@ -7,10 +7,10 @@ const faqhero = () => {
         className="absolute inset-0 w-full h-full bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg')",
+            "url('/public/images/herocity.jpg')",
         }}
       />
-      <div className="absolute inset-0 bg-[#cacaca] bg-opacity-70" />
+      <div className="absolute inset-0 bg-[#cacaca] bg-opacity-40" />
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
         <div className="relative mb-14">

@@ -9,37 +9,37 @@ const OurSectors = () => {
         title: "Static Guarding",
         description:
           "Trained officers provide on-site protection, deterring intruders and safeguarding premises.",
-        imageUrl: "https://i.postimg.cc/RhmVmnMv/portrait-male-security-guard-with-radio-station-camera-screens.jpg",
+        imageUrl: "/public/images/Static Guarding2.jpg",
       },
       {
         title: "Mobile Patrols",
         description:
           "Regular patrols secure your premises, checking vulnerable areas and deterring threats.",
-        imageUrl: "https://images.pexels.com/photos/8591606/pexels-photo-8591606.jpeg",
+        imageUrl: "/public/images/mobile patrol2.jpg",
       },
       {
         title: "Event Security",
         description:
           "Specialist guards manage entry, monitor crowds, and maintain order at events.",
-        imageUrl: "https://images.pexels.com/photos/7714702/pexels-photo-7714702.jpeg",
+        imageUrl: "/public/images/security1.jpg",
       },
       {
         title: "CCTV Monitoring",
         description:
           "Proactive camera monitoring to quickly detect and respond to incidents.",
-        imageUrl: "https://i.postimg.cc/tgyjYGKz/security-guard-protecting-client.jpg",
+        imageUrl: "/public/images/monitoring.jpg",
       },
       {
         title: "Access Control",
         description:
           "Manage and restrict entry with professional access control solutions.",
-        imageUrl: "https://i.postimg.cc/vZ8RstfP/side-view-security-men-working.jpg",
+        imageUrl: "/public/images/walkitalki.jpg",
       },
       {
         title: "Retail Security",
         description:
           "Loss prevention and customer safety with trained retail security staff.",
-        imageUrl: "https://i.postimg.cc/gJHqm8vD/portrait-male-security-guard-with-barbed-wire-fence-1.jpg",
+        imageUrl: "/public/images/security2.jpg",
       },
     ],
     []

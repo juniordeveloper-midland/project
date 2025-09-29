@@ -39,11 +39,11 @@ const Subscribe = () => {
       className="relative bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(7, 15, 25, 0.65), rgba(7, 15, 25, 0.65)), url('https://images.pexels.com/photos/1981443/pexels-photo-1981443.jpeg')",
+          "linear-gradient(rgba(7, 15, 25, 0.65), rgba(7, 15, 25, 0.65)), url('/public/images/subscribe.jpeg')",
       }}
     >
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight">
             Subscribe Our Newsletter
           </h2>
@@ -55,7 +55,7 @@ const Subscribe = () => {
           </p>
 
           <form onSubmit={handleSubmit} className="mt-6 md:mt-8">
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-xl">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 max-w-xl mx-auto">
               <input
                 type="email"
                 value={email}
@@ -86,7 +86,7 @@ const Subscribe = () => {
             
             {/* Message Display */}
             {message && (
-              <div className={`mt-4 p-3 rounded-lg text-sm ${
+              <div className={`mt-4 p-3 rounded-lg text-sm max-w-xl mx-auto ${
                 messageType === 'success' 
                   ? 'bg-green-100 text-green-800 border border-green-200' 
                   : 'bg-red-100 text-red-800 border border-red-200'
@@ -102,5 +102,3 @@ const Subscribe = () => {
 };
 
 export default Subscribe;
-
-

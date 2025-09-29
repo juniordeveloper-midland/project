@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-[500px] bg-cover bg-center bg-no-repeat" 
              style={{
-               backgroundImage: ` linear-gradient(rgba(7, 15, 25, 0.65), rgba(7, 15, 25, 0.65)) , url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg')`
+               backgroundImage: ` linear-gradient(rgba(7, 15, 25, 0.65), rgba(7, 15, 25, 0.65)) , url('/public/images/herocity.jpg')`
              }}>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -33,7 +33,7 @@ const Hero = () => {
           <div className="hidden lg:block">
             <div className="relative">
               <img 
-                src="https://i.postimg.cc/6Qt9RcfN/security-guards-workspace-removebg-preview.png" 
+                src="/public/images/homehero.png" 
                 alt="Security Personnel"
                 className="w-full h-auto max-w-md ml-auto"
               />

@@ -10,9 +10,9 @@ const Header = () => {
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-3">
-          {/* Logo + Brand */}
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center py-3">
+          {/* Logo + Brand - Left Side */}
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <img
               src="https://i.postimg.cc/8P6cvDY8/g20.jpg"
               alt="G20 Security Logo"
@@ -23,8 +23,8 @@ const Header = () => {
             </span>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-10">
+          {/* Desktop Navigation - Centered */}
+          <nav className="hidden md:flex items-center justify-center flex-1 space-x-10">
             <a
               href="/"
               className="text-gray-400 hover:text-[#1f3b7a] transition-colors text-base font-medium"
@@ -63,28 +63,30 @@ const Header = () => {
             </a>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMobileMenu}
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1"
-            aria-label="Toggle mobile menu"
-          >
-            <div
-              className={`w-6 h-0.5 bg-[#1f3b7a] transition-all duration-300 ${
-                isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            ></div>
-            <div
-              className={`w-6 h-0.5 bg-[#1f3b7a] transition-all duration-300 ${
-                isMobileMenuOpen ? "opacity-0" : ""
-              }`}
-            ></div>
-            <div
-              className={`w-6 h-0.5 bg-[#1f3b7a] transition-all duration-300 ${
-                isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            ></div>
-          </button>
+          {/* Mobile Menu Button - Right Side */}
+          <div className="md:hidden ml-auto">
+            <button
+              onClick={toggleMobileMenu}
+              className="flex flex-col justify-center items-center w-8 h-8 space-y-1"
+              aria-label="Toggle mobile menu"
+            >
+              <div
+                className={`w-6 h-0.5 bg-[#1f3b7a] transition-all duration-300 ${
+                  isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              ></div>
+              <div
+                className={`w-6 h-0.5 bg-[#1f3b7a] transition-all duration-300 ${
+                  isMobileMenuOpen ? "opacity-0" : ""
+                }`}
+              ></div>
+              <div
+                className={`w-6 h-0.5 bg-[#1f3b7a] transition-all duration-300 ${
+                  isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              ></div>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Menu */}

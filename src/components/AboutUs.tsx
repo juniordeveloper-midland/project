@@ -115,7 +115,7 @@ const AboutUs = () => {
           <div className="absolute bottom-0 right-0 hidden lg:block">
             <div className="relative">
               <img 
-                src="https://i.postimg.cc/7YkQqRHD/portrait-male-security-guard-with-uniform-removebg-preview.png" 
+                src="/public/images/home about.png" 
                 alt="Professional Security Guard"
                 className=" w-64 h-80 object-cover rounded-tl-lg shadow-2xl m-20px"
               />

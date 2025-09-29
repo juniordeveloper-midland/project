@@ -119,3 +119,4 @@ project/
 ```
 
 This solution provides reliable email delivery using Node.js and Nodemailer!
+
