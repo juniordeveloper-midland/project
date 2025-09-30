@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { OAuth2Client } from 'google-auth-library';
+import { databaseService } from './databaseService.js';
 
 dotenv.config();
 
@@ -222,8 +223,35 @@ app.post('/api/subscribe', async (req, res) => {
       });
     }
 
-    // Send admin notification
     const clientIP = req.ip || req.connection.remoteAddress || 'Unknown';
+    const userAgent = req.get('User-Agent') || 'Unknown';
+
+    // Check if email already exists
+    const existingSubscriber = await databaseService.queryOne(
+      'SELECT id FROM subscribers WHERE email = ? AND is_active = TRUE',
+      [email.toLowerCase()]
+    );
+
+    if (existingSubscriber) {
+      return res.status(400).json({
+        success: false,
+        message: 'This email is already subscribed to our newsletter.'
+      });
+    }
+
+    // Store subscription in database
+    try {
+      await databaseService.insert(
+        'INSERT INTO subscribers (email, ip_address, user_agent) VALUES (?, ?, ?)',
+        [email.toLowerCase(), clientIP, userAgent]
+      );
+      console.log(`✅ New subscription stored in database: ${email}`);
+    } catch (dbError) {
+      console.error('❌ Database error:', dbError);
+      // Continue with email sending even if database fails
+    }
+
+    // Send admin notification
     const adminEmail = createAdminEmail(email, clientIP);
     const adminResult = await transporter.sendMail(adminEmail);
 
@@ -253,12 +281,111 @@ app.post('/api/subscribe', async (req, res) => {
   }
 });
 
+// Contact form endpoint
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, phone, subject, message } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        success: false,
+        message: 'Name, email, and message are required'
+      });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Valid email address is required'
+      });
+    }
+
+    const clientIP = req.ip || req.connection.remoteAddress || 'Unknown';
+    const userAgent = req.get('User-Agent') || 'Unknown';
+
+    // Store contact message in database
+    try {
+      await databaseService.insert(
+        'INSERT INTO contact_messages (name, email, phone, subject, message, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [name, email, phone || null, subject || null, message, clientIP, userAgent]
+      );
+      console.log(`✅ New contact message stored: ${email}`);
+    } catch (dbError) {
+      console.error('❌ Database error:', dbError);
+    }
+
+    // Send notification email to admin
+    const adminEmail = {
+      from: email,
+      to: ADMIN_EMAIL,
+      subject: `New Contact Form Submission - ${subject || 'No Subject'}`,
+      text: `New Contact Form Submission
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Subject: ${subject || 'No subject'}
+Message: ${message}
+
+Submitted: ${new Date().toLocaleString()}
+IP Address: ${clientIP}
+
+---
+Please reply directly to this email to respond to the customer.`,
+      replyTo: email
+    };
+
+    await transporter.sendMail(adminEmail);
+
+    res.json({
+      success: true,
+      message: 'Thank you for your message! We will get back to you soon.'
+    });
+
+  } catch (error) {
+    console.error('Contact form error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send message. Please try again later.',
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
+
+// Admin endpoints for viewing data
+app.get('/api/admin/subscribers', authMiddleware, async (req, res) => {
+  try {
+    const subscribers = await databaseService.query(
+      'SELECT id, email, subscribed_at, ip_address FROM subscribers WHERE is_active = TRUE ORDER BY subscribed_at DESC'
+    );
+    res.json({ success: true, data: subscribers });
+  } catch (error) {
+    console.error('Error fetching subscribers:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch subscribers' });
+  }
+});
+
+app.get('/api/admin/contact-messages', authMiddleware, async (req, res) => {
+  try {
+    const messages = await databaseService.query(
+      'SELECT id, name, email, phone, subject, message, created_at FROM contact_messages ORDER BY created_at DESC'
+    );
+    res.json({ success: true, data: messages });
+  } catch (error) {
+    console.error('Error fetching contact messages:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch contact messages' });
+  }
+});
+
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  const dbStatus = await databaseService.testConnection();
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    service: 'G20 Security Newsletter API'
+    service: 'G20 Security Newsletter API',
+    database: dbStatus ? 'Connected' : 'Disconnected'
   });
 });
 
@@ -273,11 +400,31 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📧 Admin email: ${ADMIN_EMAIL}`);
-  console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
-});
+// Initialize database and start server
+async function startServer() {
+  try {
+    // Test database connection
+    const dbConnected = await databaseService.testConnection();
+    if (!dbConnected) {
+      console.error('❌ Failed to connect to database. Server will still start but database features will be unavailable.');
+    }
+
+    // Initialize database tables
+    await databaseService.initializeTables();
+
+    // Start server
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📧 Admin email: ${ADMIN_EMAIL}`);
+      console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
+      console.log(`🗄️ Database: ${dbConnected ? 'Connected' : 'Disconnected'}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 export default app;

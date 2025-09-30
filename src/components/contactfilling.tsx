@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Phone, Mail, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { Phone, Mail, Loader2, CheckCircle, XCircle } from 'lucide-react';
+import { contactService, ContactFormData } from '../services/contactService';
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     firstName: '',
     lastName: '',
     email: '',
@@ -10,18 +11,97 @@ const ContactForm = () => {
     message: ''
   });
 
-  const handleInputChange = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+    
+    // Reset submit status when user starts typing
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+      setSubmitMessage('');
+    }
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = (): boolean => {
+    if (!formData.firstName.trim()) {
+      setSubmitStatus('error');
+      setSubmitMessage('First name is required');
+      return false;
+    }
+    if (!formData.lastName.trim()) {
+      setSubmitStatus('error');
+      setSubmitMessage('Last name is required');
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setSubmitStatus('error');
+      setSubmitMessage('Email address is required');
+      return false;
+    }
+    if (!formData.phone.trim()) {
+      setSubmitStatus('error');
+      setSubmitMessage('Phone number is required');
+      return false;
+    }
+    if (!formData.message.trim()) {
+      setSubmitStatus('error');
+      setSubmitMessage('Message is required');
+      return false;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus('error');
+      setSubmitMessage('Please enter a valid email address');
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic here
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitMessage('');
+
+    try {
+      const response = await contactService.submitContactForm(formData);
+      
+      if (response.success) {
+        setSubmitStatus('success');
+        setSubmitMessage(response.message);
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+        setSubmitMessage(response.message);
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage('An unexpected error occurred. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -157,12 +237,34 @@ const ContactForm = () => {
                 />
               </div>
 
+              {/* Status Message */}
+              {submitStatus !== 'idle' && (
+                <div className={`p-4 rounded-lg flex items-center space-x-3 ${
+                  submitStatus === 'success' 
+                    ? 'bg-green-100 text-green-800 border border-green-200' 
+                    : 'bg-red-100 text-red-800 border border-red-200'
+                }`}>
+                  {submitStatus === 'success' ? (
+                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                  ) : (
+                    <XCircle className="w-5 h-5 flex-shrink-0" />
+                  )}
+                  <span className="text-sm font-medium">{submitMessage}</span>
+                </div>
+              )}
+
               {/* Submit Button */}
               <button
                 onClick={handleSubmit}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg"
+                disabled={isSubmitting}
+                className={`w-full font-semibold py-4 px-6 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center space-x-2 ${
+                  isSubmitting
+                    ? 'bg-blue-400 cursor-not-allowed text-white'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                }`}
               >
-                Send Message
+                {isSubmitting && <Loader2 className="w-5 h-5 animate-spin" />}
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               </button>
             </div>
           </div>
