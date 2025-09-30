@@ -378,6 +378,145 @@ app.get('/api/admin/contact-messages', authMiddleware, async (req, res) => {
   }
 });
 
+// Social Media Links endpoints
+app.get('/api/social-media', async (req, res) => {
+  try {
+    const links = await databaseService.query(
+      'SELECT platform, url, icon_class, display_order FROM social_media_links WHERE is_active = TRUE ORDER BY display_order ASC'
+    );
+    res.json({ success: true, data: links });
+  } catch (error) {
+    console.error('Error fetching social media links:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch social media links' });
+  }
+});
+
+app.get('/api/admin/social-media', authMiddleware, async (req, res) => {
+  try {
+    const links = await databaseService.query(
+      'SELECT id, platform, url, icon_class, is_active, display_order, created_at, updated_at FROM social_media_links ORDER BY display_order ASC'
+    );
+    res.json({ success: true, data: links });
+  } catch (error) {
+    console.error('Error fetching social media links:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch social media links' });
+  }
+});
+
+app.put('/api/admin/social-media/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { url, is_active, display_order } = req.body;
+
+    const affectedRows = await databaseService.update(
+      'UPDATE social_media_links SET url = ?, is_active = ?, display_order = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+      [url, is_active, display_order, id]
+    );
+
+    if (affectedRows === 0) {
+      return res.status(404).json({ success: false, message: 'Social media link not found' });
+    }
+
+    res.json({ success: true, message: 'Social media link updated successfully' });
+  } catch (error) {
+    console.error('Error updating social media link:', error);
+    res.status(500).json({ success: false, message: 'Failed to update social media link' });
+  }
+});
+
+// Testimonials endpoints
+app.get('/api/testimonials', async (req, res) => {
+  try {
+    const { featured } = req.query;
+    let query = 'SELECT customer_name, customer_position, customer_company, testimonial_text, customer_image, rating FROM testimonials WHERE is_active = TRUE';
+    
+    if (featured === 'true') {
+      query += ' AND is_featured = TRUE';
+    }
+    
+    query += ' ORDER BY display_order ASC';
+
+    const testimonials = await databaseService.query(query);
+    res.json({ success: true, data: testimonials });
+  } catch (error) {
+    console.error('Error fetching testimonials:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch testimonials' });
+  }
+});
+
+app.get('/api/admin/testimonials', authMiddleware, async (req, res) => {
+  try {
+    const testimonials = await databaseService.query(
+      'SELECT id, customer_name, customer_position, customer_company, testimonial_text, customer_image, rating, is_featured, is_active, display_order, created_at, updated_at FROM testimonials ORDER BY display_order ASC'
+    );
+    res.json({ success: true, data: testimonials });
+  } catch (error) {
+    console.error('Error fetching testimonials:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch testimonials' });
+  }
+});
+
+app.post('/api/admin/testimonials', authMiddleware, async (req, res) => {
+  try {
+    const { customer_name, customer_position, customer_company, testimonial_text, customer_image, rating, is_featured, is_active, display_order } = req.body;
+
+    if (!customer_name || !testimonial_text) {
+      return res.status(400).json({ success: false, message: 'Customer name and testimonial text are required' });
+    }
+
+    const insertId = await databaseService.insert(
+      'INSERT INTO testimonials (customer_name, customer_position, customer_company, testimonial_text, customer_image, rating, is_featured, is_active, display_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [customer_name, customer_position || null, customer_company || null, testimonial_text, customer_image || null, rating || 5, is_featured || false, is_active !== false, display_order || 0]
+    );
+
+    res.json({ success: true, message: 'Testimonial created successfully', id: insertId });
+  } catch (error) {
+    console.error('Error creating testimonial:', error);
+    res.status(500).json({ success: false, message: 'Failed to create testimonial' });
+  }
+});
+
+app.put('/api/admin/testimonials/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { customer_name, customer_position, customer_company, testimonial_text, customer_image, rating, is_featured, is_active, display_order } = req.body;
+
+    const affectedRows = await databaseService.update(
+      'UPDATE testimonials SET customer_name = ?, customer_position = ?, customer_company = ?, testimonial_text = ?, customer_image = ?, rating = ?, is_featured = ?, is_active = ?, display_order = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+      [customer_name, customer_position, customer_company, testimonial_text, customer_image, rating, is_featured, is_active, display_order, id]
+    );
+
+    if (affectedRows === 0) {
+      return res.status(404).json({ success: false, message: 'Testimonial not found' });
+    }
+
+    res.json({ success: true, message: 'Testimonial updated successfully' });
+  } catch (error) {
+    console.error('Error updating testimonial:', error);
+    res.status(500).json({ success: false, message: 'Failed to update testimonial' });
+  }
+});
+
+app.delete('/api/admin/testimonials/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const affectedRows = await databaseService.update(
+      'DELETE FROM testimonials WHERE id = ?',
+      [id]
+    );
+
+    if (affectedRows === 0) {
+      return res.status(404).json({ success: false, message: 'Testimonial not found' });
+    }
+
+    res.json({ success: true, message: 'Testimonial deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting testimonial:', error);
+    res.status(500).json({ success: false, message: 'Failed to delete testimonial' });
+  }
+});
+
 // Health check endpoint
 app.get('/api/health', async (req, res) => {
   const dbStatus = await databaseService.testConnection();
