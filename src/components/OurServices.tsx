@@ -11,7 +11,7 @@ const OurServices = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-blue-700 mb-4">Our Services</h2>
+          <h2 className="text-4xl font-bold text-blue-900 mb-4">Our Services</h2>
           <p className="text-gray-600 text-lg max-w-4xl mx-auto leading-relaxed">
             G20 Security delivers tailored protection across industries, from construction to retail and more. With free guard 
             tracking, we ensure reliability, transparency, and peace of mind.
@@ -37,7 +37,7 @@ const OurServices = () => {
                 Fixed guards provide constant protection. They deter intruders and control access. Our officers monitor and prevent risks. Reliable presence for total peace of mind.
               </p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
                 onClick={handleViewMore}
               >
                 View More →
@@ -57,12 +57,12 @@ const OurServices = () => {
               </div>
             </div>
             <div className="px-4 pb-4">
-              <h3 className="text-lg font-bold text-blue-700 mb-2">Man Guarding</h3>
+              <h3 className="text-lg font-bold text-blue-900 mb-2">Man Guarding</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Expert officers trained in conflict resolution, crowd control, and emergency response. Our man guarding services provide professional protection tailored to your specific needs.
               </p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
                 onClick={handleViewMore}
               >
                 View More →
@@ -82,12 +82,12 @@ const OurServices = () => {
             </div>
             </div>
             <div className="p-4 ">
-              <h3 className="text-lg font-bold text-blue-700 mb-2">Private Security</h3>
+              <h3 className="text-lg font-bold text-blue-900 mb-2">Private Security</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Discreet security solutions and close protection services for high-profile individuals, executives, and VIPs requiring personal protection.
               </p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
                 onClick={handleViewMore}
               >
                 View More →
@@ -107,12 +107,12 @@ const OurServices = () => {
             </div>
             </div>
             <div className="p-4">
-              <h3 className="text-lg font-bold text-blue-700 mb-2">Mobile Patrols</h3>
+              <h3 className="text-lg font-bold text-blue-900 mb-2">Mobile Patrols</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Regular drive-by and patrol visits. Mobile Security patrols are ideal for checking multiple sites, providing visible deterrent and rapid response capabilities.
               </p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
                 onClick={handleViewMore}
               >
                 View More →
@@ -132,12 +132,12 @@ const OurServices = () => {
             </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold text-blue-700 mb-3">Event Security</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-3">Event Security</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Events manage access and crowd control. We provide bag searches and crowd management, ensuring your event runs smoothly and safely for all attendees.
               </p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
                 onClick={handleViewMore}
               >
                 View More →
@@ -157,12 +157,12 @@ const OurServices = () => {
             </div>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold text-blue-700 mb-3">Access Control</h3>
+              <h3 className="text-xl font-bold text-blue-900 mb-3">Access Control</h3>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                 Officers verify visiting users entry. We check all visitors and staff entry, maintaining detailed logs and ensuring only authorized personnel access your premises.
               </p>
               <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
+                className="bg-blue-900 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 inline-flex items-center"
                 onClick={handleViewMore}
               >
                 View More →

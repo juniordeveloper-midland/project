@@ -16,7 +16,7 @@ export default function WhyChooseUs() {
           <div className="lg:w-1/2 space-y-12">
             {/* SIA Approved Security */}
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 p-3 rounded-lg flex-shrink-0">
+              <div className="bg-blue-900 p-3 rounded-lg flex-shrink-0">
                 <Shield className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -29,7 +29,7 @@ export default function WhyChooseUs() {
 
             {/* Nationwide Coverage */}
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 p-3 rounded-lg flex-shrink-0">
+              <div className="bg-blue-900 p-3 rounded-lg flex-shrink-0">
                 <MapPin className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -42,7 +42,7 @@ export default function WhyChooseUs() {
 
             {/* 10+ Years of Expertise */}
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 p-3 rounded-lg flex-shrink-0">
+              <div className="bg-blue-900 p-3 rounded-lg flex-shrink-0">
                 <FileText className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
 
             {/* 24/7 Protection */}
             <div className="flex items-start gap-4">
-              <div className="bg-blue-600 p-3 rounded-lg flex-shrink-0">
+              <div className="bg-blue-900 p-3 rounded-lg flex-shrink-0">
                 <Clock className="w-6 h-6 text-white" />
               </div>
               <div>

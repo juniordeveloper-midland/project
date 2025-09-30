@@ -74,6 +74,14 @@ const BlogDetail = () => {
         category: "Security Service, Save People",
   image: "/images/walkitalki.jpg"
       },
+        {
+        id: 101,
+        title: "How Manpower Security Supports Emergency Evacuations Effectively",
+        excerpt: "Expert security personnel coordinate routes, communicate clearly, and keep people calm to ensure fast and safe evacuations across large facilities.",
+        date: "August 30, 2025",
+        category: "Security Service, Save People",
+  image: "/images/walkitalki.jpg"
+      },
       {
         id: 102,
         title: "Why Post Orders Matter For Every Guard Shift",
@@ -82,6 +90,7 @@ const BlogDetail = () => {
         category: "Operations, Best Practices",
   image: "/images/monitoring.jpg"
       }
+      
     ],
     2: [
       {

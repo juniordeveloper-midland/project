@@ -2,7 +2,7 @@ import React from 'react';
 
 const OurBlogs = () => {
   return (
-    <section className="bg-blue-700 py-16">
+    <section className="bg-blue-900 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">

@@ -8,7 +8,7 @@ const WhoWeAre = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 items-start">
           {/* Left Section - Who We Are */}
           <div className="flex flex-col items-center text-center space-y-4">
-            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-blue-800 text-xl font-bold">1</div>
+            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-blue-900 text-xl font-bold">1</div>
             <h2 className="text-4xl lg:text-5xl font-bold">Who We Are</h2>
             <p className="text-sm leading-relaxed max-w-xs">
               With years of industry experience, G20 Security specializes in delivering reliable, round-the-clock security services, trusted by businesses across the UK.
@@ -17,7 +17,7 @@ const WhoWeAre = () => {
 
           {/* Middle Section - Our Mission */}
           <div className="flex flex-col items-center text-center space-y-4 border-t lg:border-t-0 lg:border-l lg:border-r border-white/30 px-0 lg:px-8 pt-8 lg:pt-0">
-            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-blue-800 text-xl font-bold">2</div>
+            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-blue-900 text-xl font-bold">2</div>
             <h2 className="text-4xl lg:text-5xl font-bold">Our Mission</h2>
             <p className="text-sm leading-relaxed max-w-xs">
               To deliver tailored, high-quality security solutions built on integrity, reliability, and professionalism - keeping people, property, and businesses safe.
@@ -26,7 +26,7 @@ const WhoWeAre = () => {
 
           {/* Right Section - Our Vision */}
           <div className="flex flex-col items-center text-center space-y-4">
-            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-blue-800 text-xl font-bold">3</div>
+            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-blue-900 text-xl font-bold">3</div>
             <h2 className="text-4xl lg:text-5xl font-bold">Our Vision</h2>
             <p className="text-sm leading-relaxed max-w-xs">
               Our vision is to be the UK's most trusted security partner. We deliver innovative, reliable, and people-focused solutions.

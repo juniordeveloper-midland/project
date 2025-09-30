@@ -162,7 +162,7 @@ const OurSectors = () => {
   return (
     <section className="relative">
       {/* Background with gradient that extends behind cards */}
-      <div className="bg-gradient-to-b from-blue-700 via-blue-600 to-blue-500 pb-32">
+      <div className="bg-gradient-to-b from-blue-900 via-blue-900 to-blue-900 pb-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-3">Our Sectors</h2>
