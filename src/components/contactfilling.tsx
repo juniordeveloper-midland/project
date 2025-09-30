@@ -173,7 +173,7 @@ const ContactForm = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    placeholder="eg: Sara"
+                    placeholder="eg: First Name"
                     className="w-full px-4 py-3 bg-gray-200 border-0 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-200 text-gray-700 placeholder-gray-500"
                   />
                 </div>
@@ -186,7 +186,7 @@ const ContactForm = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    placeholder="eg: Chawla"
+                    placeholder="eg: Last Name"
                     className="w-full px-4 py-3 bg-gray-200 border-0 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-200 text-gray-700 placeholder-gray-500"
                   />
                 </div>
