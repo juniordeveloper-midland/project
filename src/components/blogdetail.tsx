@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Calendar, User, ChevronRight } from 'lucide-react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 
 const BlogDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -148,14 +148,13 @@ const BlogDetail = () => {
             <div className="space-y-8">
               {(contentByPage[currentPage] || contentByPage[1]).map((post) => (
                 <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <div className="relative">
+                  <Link to={`/blogs/${post.id}`} className="block relative">
                     <img 
                       src={post.image} 
                       alt={post.title}
                       className="w-full h-64 object-cover"
                     />
-                  </div>
-                  
+                  </Link>
 
                   <div className="p-6">
                     <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
@@ -169,9 +168,11 @@ const BlogDetail = () => {
                       </span>
                     </div>
                     
-                    <h2 className="text-xl font-bold text-gray-900 mb-4 hover:text-blue-600 cursor-pointer transition-colors">
-                      {post.title}
-                    </h2>
+                    <Link to={`/blogs/${post.id}`}>
+                      <h2 className="text-xl font-bold text-gray-900 mb-4 hover:text-blue-600 cursor-pointer transition-colors">
+                        {post.title}
+                      </h2>
+                    </Link>
                     
                     <p className="text-gray-700 leading-relaxed">
                       {post.excerpt}
