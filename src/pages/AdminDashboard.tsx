@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { changeCredentials, getMe, logout, type User } from '../services/authClient';
 
 export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
@@ -40,7 +41,10 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold text-gray-800">Admin Dashboard</h1>
-          <button onClick={handleLogout} className="bg-gray-800 text-white px-3 py-2 rounded">Logout</button>
+          <div className="flex items-center gap-3">
+            <Link to="/admin-blogs" className="bg-blue-600 text-white px-3 py-2 rounded">Manage Blogs</Link>
+            <button onClick={handleLogout} className="bg-gray-800 text-white px-3 py-2 rounded">Logout</button>
+          </div>
         </div>
 
         <div className="bg-white shadow rounded p-6">

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Play } from 'lucide-react';
 
 const Triangle: React.FC<{ className?: string }> = ({ className }) => (
   <span className={`block w-0 h-0 border-l-[7px] border-r-[7px] border-b-[12px] border-transparent border-b-white ${className || ''}`}></span>

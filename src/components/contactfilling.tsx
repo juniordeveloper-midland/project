@@ -97,7 +97,7 @@ const ContactForm = () => {
         setSubmitStatus('error');
         setSubmitMessage(response.message);
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
       setSubmitMessage('An unexpected error occurred. Please try again later.');
     } finally {

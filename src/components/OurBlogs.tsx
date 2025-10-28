@@ -1,10 +1,24 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getPublicPosts } from '../services/blogService';
+import { resolveAssetUrl } from '../utils/url';
+import { formatDateTime } from '../utils/date';
 
 const OurBlogs = () => {
+  const [posts, setPosts] = useState<any[]>([]);
+  useEffect(() => {
+    let mounted = true;
+    getPublicPosts(4).then((data) => {
+      if (mounted) setPosts(data || []);
+    }).catch(() => {
+      // leave fallback empty
+    });
+    return () => { mounted = false; };
+  }, []);
+
   return (
     <section className="bg-blue-900 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">Our Blogs</h2>
           <p className="text-white text-lg max-w-4xl mx-auto leading-relaxed">
@@ -12,91 +26,34 @@ const OurBlogs = () => {
           </p>
         </div>
 
-        {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="relative h-48 bg-gray-200">
-              <img 
-                src="/images/Man Gaurding3.jpg" 
-                alt="Security Blog"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3">
-               
+          {posts.length === 0 ? (
+            // simple placeholders if none found
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="relative h-48 bg-gray-200" />
+                <div className="p-4">
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">Loading...</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">Please wait</p>
+                </div>
               </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                How Manpower Security Guards Enhance Emergency Response
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Understanding how trained security personnel can significantly improve emergency response times and effectiveness in critical situations.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="relative h-48 bg-gray-200">
-              <img 
-                src="/images/mobile security3.jpg" 
-                alt="Security Blog"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3">
-                
+            ))
+          ) : (
+            posts.map((p) => (
+              <div key={p.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <Link to={`/blogs/${p.id}`} className="block relative">
+                  <div className="relative h-48 bg-gray-200">
+                    <img src={resolveAssetUrl(p.featured_image) || '/images/Man Gaurding3.jpg'} alt={p.title} className="w-full h-full object-cover" />
+                  </div>
+                </Link>
+                <div className="p-4">
+                  <div className="text-sm text-gray-500 mb-2">{p.author ? p.author : ''}{p.author && p.published_at ? ' • ' : ''}{p.published_at ? formatDateTime(p.published_at) : ''}</div>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">{p.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{p.excerpt || ''}</p>
+                </div>
               </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                Top 5 Benefits of Using Static and Mobile Security Guards
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Learn from static and mobile guards and discover the key advantages of combining both security approaches for comprehensive protection.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="relative h-48 bg-gray-200">
-              <img 
-                src="/images/Private Security.jpg" 
-                alt="Security Blog"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3">
-               
-              </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                Why Manpower Security is Essential for Business Safety
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Explore the critical role that professional security guards play in maintaining business safety and protecting valuable assets.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="relative h-48 bg-gray-200">
-              <img 
-                src="/images/Man Guarding 2.jpg" 
-                alt="Security Blog"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-3 left-3">
-              
-              </div>
-            </div>
-            <div className="p-4">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
-                The Role of Manpower Security in Preventing Workplace Incidents
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Discover how trained security personnel can proactively prevent workplace incidents and create safer work environments.
-              </p>
-            </div>
-          </div>
+            ))
+          )}
         </div>
       </div>
     </section>

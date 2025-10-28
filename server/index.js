@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer';
 import nodemailer from 'nodemailer';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -32,6 +33,24 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../dist')));
+
+// serve uploaded files
+const UPLOADS_DIR = path.join(process.cwd(), 'server', 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+app.use('/uploads', express.static(UPLOADS_DIR));
+
+// multer setup for image uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, UPLOADS_DIR);
+  },
+  filename: function (req, file, cb) {
+    const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    const safe = (file.originalname || 'file').replace(/[^a-zA-Z0-9.\-\_]/g, '_');
+    cb(null, `${unique}-${safe}`);
+  }
+});
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } }); // 5MB limit
 
 // Email configuration
 const transporter = nodemailer.createTransport({
@@ -391,6 +410,131 @@ app.get('/api/social-media', async (req, res) => {
   }
 });
 
+// --- BLOGS API ---
+// Public: list published blogs (optional ?limit)
+app.get('/api/blogs', async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit || '0', 10) || 0;
+    let sql = "SELECT id, title, slug, excerpt, featured_image, author, status, created_at, updated_at, published_at FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC";
+    if (limit > 0) sql += ' LIMIT ' + limit;
+    const posts = await databaseService.query(sql);
+    res.json({ success: true, data: posts });
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch blogs' });
+  }
+});
+
+// Public: get single post by id (or slug)
+app.get('/api/blogs/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    let post = null;
+    if (/^\d+$/.test(id)) {
+      post = await databaseService.queryOne('SELECT * FROM blog_posts WHERE id = ? AND status = "published"', [id]);
+    } else {
+      post = await databaseService.queryOne('SELECT * FROM blog_posts WHERE slug = ? AND status = "published"', [id]);
+    }
+    if (!post) return res.status(404).json({ success: false, message: 'Post not found' });
+    res.json({ success: true, data: post });
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch blog post' });
+  }
+});
+
+// Admin: manage blog posts
+app.get('/api/admin/blogs', authMiddleware, async (req, res) => {
+  try {
+    const posts = await databaseService.query('SELECT * FROM blog_posts ORDER BY created_at DESC');
+    res.json({ success: true, data: posts });
+  } catch (error) {
+    console.error('Error fetching admin blogs:', error);
+    res.status(500).json({ success: false, message: 'Failed to fetch admin blogs' });
+  }
+});
+
+app.post('/api/admin/blogs', authMiddleware, async (req, res) => {
+  try {
+    console.log('[admin.blogs.create] user=', req.user && req.user.email, 'ip=', req.ip);
+    console.log('[admin.blogs.create] body=', JSON.stringify(req.body || {}));
+    const { title, slug, content, excerpt, featured_image, author, status, published_at } = req.body || {};
+    if (!title || !slug || !content) return res.status(400).json({ success: false, message: 'title, slug and content are required' });
+    // If publishing now and published_at not provided, set to current timestamp (store as UTC MySQL datetime)
+    function toMySQLDatetime(d) {
+      if (!d) return null;
+      const date = new Date(d);
+      return date.toISOString().slice(0, 19).replace('T', ' ');
+    }
+    const pubAt = status === 'published' ? toMySQLDatetime(published_at ? published_at : new Date()) : null;
+    const insertId = await databaseService.insert(
+      'INSERT INTO blog_posts (title, slug, content, excerpt, featured_image, author, status, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [title, slug, content, excerpt || null, featured_image || null, author || 'G20 Security Team', status || 'draft', pubAt]
+    );
+    res.json({ success: true, message: 'Blog created', id: insertId });
+  } catch (error) {
+    console.error('Error creating blog post:', error);
+    res.status(500).json({ success: false, message: 'Failed to create blog post' });
+  }
+});
+
+app.put('/api/admin/blogs/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, slug, content, excerpt, featured_image, author, status, published_at } = req.body || {};
+    // If status is published and no published_at provided, set it to now (store as UTC MySQL datetime)
+    function toMySQLDatetime(d) {
+      if (!d) return null;
+      const date = new Date(d);
+      return date.toISOString().slice(0, 19).replace('T', ' ');
+    }
+    const pubAt = status === 'published' ? toMySQLDatetime(published_at ? published_at : new Date()) : (published_at ? toMySQLDatetime(published_at) : null);
+    const affected = await databaseService.update(
+      'UPDATE blog_posts SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, author = ?, status = ?, published_at = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+      [title, slug, content, excerpt || null, featured_image || null, author || 'G20 Security Team', status || 'draft', pubAt, id]
+    );
+    if (affected === 0) return res.status(404).json({ success: false, message: 'Blog not found' });
+    res.json({ success: true, message: 'Blog updated' });
+  } catch (error) {
+    console.error('Error updating blog post:', error);
+    res.status(500).json({ success: false, message: 'Failed to update blog post' });
+  }
+});
+
+// Admin: delete blog post (and its uploaded image file if present)
+app.delete('/api/admin/blogs/:id', authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    // fetch post to see if it has a featured_image we should remove
+    const post = await databaseService.queryOne('SELECT featured_image FROM blog_posts WHERE id = ?', [id]);
+    if (!post) return res.status(404).json({ success: false, message: 'Blog not found' });
+
+    // attempt to delete uploaded file if it lives under /uploads
+    try {
+      const img = post.featured_image;
+      if (img && typeof img === 'string' && img.startsWith('/uploads/')) {
+        const filename = img.replace(/^\/uploads\//, '');
+        const filePath = path.join(UPLOADS_DIR, filename);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+          console.log('[admin.blogs.delete] removed file', filePath);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to remove uploaded image for deleted blog:', e?.message || e);
+    }
+
+    const affected = await databaseService.update('DELETE FROM blog_posts WHERE id = ?', [id]);
+    if (affected === 0) return res.status(404).json({ success: false, message: 'Blog not found' });
+    console.log('[admin.blogs.delete] user=', req.user?.email, 'id=', id);
+    res.json({ success: true, message: 'Blog deleted' });
+  } catch (error) {
+    console.error('Error deleting blog post:', error);
+    res.status(500).json({ success: false, message: 'Failed to delete blog post' });
+  }
+});
+
+
 app.get('/api/admin/social-media', authMiddleware, async (req, res) => {
   try {
     const links = await databaseService.query(
@@ -473,6 +617,20 @@ app.post('/api/admin/testimonials', authMiddleware, async (req, res) => {
   } catch (error) {
     console.error('Error creating testimonial:', error);
     res.status(500).json({ success: false, message: 'Failed to create testimonial' });
+  }
+});
+
+// Image upload endpoint for blog featured images
+app.post('/api/admin/blogs/upload-image', authMiddleware, upload.single('image'), async (req, res) => {
+  try {
+    console.log('[admin.blogs.upload] user=', req.user && req.user.email, 'ip=', req.ip, 'file=', req.file && req.file.originalname);
+    if (!req.file) return res.status(400).json({ success: false, message: 'No file uploaded' });
+    // Return a public path for the uploaded file
+    const publicPath = `/uploads/${req.file.filename}`;
+    res.json({ success: true, path: publicPath });
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    res.status(500).json({ success: false, message: 'Failed to upload image' });
   }
 });
 

@@ -1,12 +1,29 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Calendar, User, ChevronRight } from 'lucide-react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { getPublicPosts } from '../services/blogService';
+import { resolveAssetUrl } from '../utils/url';
+import { formatDateTime } from '../utils/date';
 
 const BlogDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const totalPages = 4;
+  const [posts, setPosts] = useState<any[]>([]);
   const pageParam = parseInt(searchParams.get('page') || '1', 10);
+  const pageSize = 2; // posts per page
+  const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
   const currentPage = Number.isNaN(pageParam) ? 1 : Math.min(Math.max(pageParam, 1), totalPages);
+
+  useEffect(() => {
+    // fetch posts
+    let mounted = true;
+    getPublicPosts().then((data) => {
+      if (mounted) setPosts(data || []);
+    }).catch(() => {
+      // ignore
+    });
+    return () => { mounted = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     // Ensure URL stays in sync and scroll to top on page change
@@ -27,117 +44,15 @@ const BlogDetail = () => {
     next.set('page', String(pageNumber));
     setSearchParams(next);
   };
-  const latestPosts = [
-    {
-      id: 1,
-      title: "How Manpower Security Supports Emergency Evacuations Effectively",
-      date: "July 3, 2025",
-      image: "/api/placeholder/80/60"
-    },
-    {
-      id: 2,
-      title: "Top 5 Benefits of Hiring Static and Mobile Security Guards",
-      date: "July 3, 2025",
-      image: "/api/placeholder/80/60"
-    },
-    {
-      id: 3,
-      title: "The Role of Manpower Security in Preventing Workplace Theft",
-      date: "May 1, 2025",
-      image: "/api/placeholder/80/60"
-    },
-    {
-      id: 4,
-      title: "Why Manpower Security is Essential for Modern Workplaces",
-      date: "November 1, 2025",
-      image: "/api/placeholder/80/60"
-    }
-  ];
-
+  const latestPosts = posts.slice(0, 4);
   const categories = [
-    "Static Guarding",
-    "Man Guarding", 
-    "Private Security",
-    "Mobile Patrols",
-    "Event Security",
-    "Access Control"
+    'Static Guarding',
+    'Man Guarding',
+    'Private Security',
+    'Mobile Patrols',
+    'Event Security',
+    'Access Control'
   ];
-
-  // Distinct main content for each of the 4 pages
-  const contentByPage: Record<number, { id: number; title: string; excerpt: string; date: string; category: string; image: string; }[]> = {
-    1: [
-      {
-        id: 101,
-        title: "How Manpower Security Supports Emergency Evacuations Effectively",
-        excerpt: "Expert security personnel coordinate routes, communicate clearly, and keep people calm to ensure fast and safe evacuations across large facilities.",
-        date: "August 30, 2025",
-        category: "Security Service, Save People",
-  image: "/images/walkitalki.jpg"
-      },
-      {
-        id: 102,
-        title: "Why Post Orders Matter For Every Guard Shift",
-        excerpt: "Clear post orders reduce confusion, align response protocols, and make every shift consistent and accountable.",
-        date: "August 22, 2025",
-        category: "Operations, Best Practices",
-  image: "/images/monitoring.jpg"
-      }
-    ],
-    2: [
-      {
-        id: 201,
-        title: "The Role of Manpower Security in Preventing Workplace Theft",
-        excerpt: "Visible patrols, access control, and incident reporting deter internal and external theft while improving employee confidence.",
-        date: "May 1, 2025",
-        category: "Security Service, Save People",
-        image: "/api/placeholder/400/250"
-      },
-      {
-        id: 202,
-        title: "Building a Culture of Security Awareness",
-        excerpt: "Training staff to identify risks and report concerns turns every employee into a proactive security partner.",
-        date: "April 12, 2025",
-        category: "Training, Culture",
-        image: "/api/placeholder/400/250"
-      }
-    ],
-    3: [
-      {
-        id: 301,
-        title: "Top 5 Benefits of Hiring Static and Mobile Security Guards",
-        excerpt: "From rapid response to broad coverage, combining static and mobile units delivers layered, reliable protection.",
-        date: "July 2, 2025",
-        category: "Security Service, Save People",
-        image: "/api/placeholder/400/250"
-      },
-      {
-        id: 302,
-        title: "Choosing Between 12-Hour and 8-Hour Guard Shifts",
-        excerpt: "Understand fatigue risks, cost structures, and coverage quality to select the right shift model for your site.",
-        date: "June 14, 2025",
-        category: "Staffing, Scheduling",
-        image: "/api/placeholder/400/250"
-      }
-    ],
-    4: [
-      {
-        id: 401,
-        title: "Why Manpower Security is Essential for Modern Workplaces",
-        excerpt: "Evolving threats require trained professionals who blend customer service with proactive risk mitigation.",
-        date: "November 1, 2025",
-        category: "Strategy, Operations",
-        image: "/api/placeholder/400/250"
-      },
-      {
-        id: 402,
-        title: "Incident Reporting: From Observation to Action",
-        excerpt: "Timely, well-structured reports accelerate root-cause analysis and improve long-term site resilience.",
-        date: "October 20, 2025",
-        category: "Compliance, Process",
-        image: "/api/placeholder/400/250"
-      }
-    ]
-  };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -146,25 +61,28 @@ const BlogDetail = () => {
           {/* Main Content */}
           <div className="lg:w-2/3">
             <div className="space-y-8">
-              {(contentByPage[currentPage] || contentByPage[1]).map((post) => (
+              {(() => {
+                const start = (currentPage - 1) * pageSize;
+                const visible = posts.slice(start, start + pageSize);
+                return (visible.length ? visible : posts.slice(0, pageSize)).map((post) => (
                 <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                   <Link to={`/blogs/${post.id}`} className="block relative">
-                    <img 
-                      src={post.image} 
-                      alt={post.title}
-                      className="w-full h-64 object-cover"
-                    />
+                      <img 
+                        src={resolveAssetUrl(post.featured_image) || '/api/placeholder/400/250'} 
+                        alt={post.title}
+                        className="w-full h-64 object-cover"
+                      />
                   </Link>
 
                   <div className="p-6">
                     <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                       <span className="flex items-center gap-1">
                         <User size={16} />
-                        {post.category}
+                        {post.author || ''}
                       </span>
                       <span className="flex items-center gap-1">
                         <Calendar size={16} />
-                        {post.date}
+                        {post.published_at ? formatDateTime(post.published_at) : ''}
                       </span>
                     </div>
                     
@@ -179,7 +97,8 @@ const BlogDetail = () => {
                     </p>
                   </div>
                 </article>
-              ))}
+              ));
+            })()}
             </div>
 
             {/* Pagination */}

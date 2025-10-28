@@ -10,6 +10,7 @@ import Faq from './faq/faq';
 import Policy from './policy/policy';
 import AdminLogin from './pages/AdminLogin.tsx';
 import AdminDashboard from './pages/AdminDashboard.tsx';
+import AdminBlogs from './pages/AdminBlogs';
 import { useEffect, useState } from 'react';
 import { getMe } from './services/authClient';
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/policy" element={<Policy />} />
         <Route path="/admin-access-login" element={<AdminLogin onLogin={() => setIsAuthed(true)} />} />
         <Route path="/admin-dashboard" element={isAuthed ? <AdminDashboard onLogout={() => setIsAuthed(false)} /> : <Navigate to="/admin-access-login" replace />} />
+        <Route path="/admin-blogs" element={isAuthed ? <AdminBlogs /> : <Navigate to="/admin-access-login" replace />} />
       </Routes>
     </BrowserRouter>
   );
