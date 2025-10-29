@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/footer';
+import AdminLayout from '../components/admin/AdminLayout';
 import { getAdminSubscribers } from '../services/adminDataService';
 
 export default function AdminSubscribers() {
@@ -19,10 +18,8 @@ export default function AdminSubscribers() {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <div className="p-6 max-w-5xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Manage Subscribers</h2>
+    <AdminLayout title="Subscribers">
+      <div className="max-w-5xl mx-auto">
         {error ? <div className="text-red-600 mb-3">{error}</div> : null}
         <div className="bg-white rounded shadow overflow-x-auto">
           {loading ? (
@@ -49,8 +46,7 @@ export default function AdminSubscribers() {
           )}
         </div>
       </div>
-      <Footer />
-    </div>
+    </AdminLayout>
   );
 }
 

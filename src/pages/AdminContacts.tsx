@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/footer';
+import AdminLayout from '../components/admin/AdminLayout';
 import { getAdminContactMessages } from '../services/adminDataService';
 
 export default function AdminContacts() {
@@ -19,10 +18,8 @@ export default function AdminContacts() {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <div className="p-6 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Manage Contact Messages</h2>
+    <AdminLayout title="Contact Messages">
+      <div className="max-w-6xl mx-auto">
         {error ? <div className="text-red-600 mb-3">{error}</div> : null}
         <div className="bg-white rounded shadow overflow-x-auto">
           {loading ? (
@@ -55,8 +52,7 @@ export default function AdminContacts() {
           )}
         </div>
       </div>
-      <Footer />
-    </div>
+    </AdminLayout>
   );
 }
 

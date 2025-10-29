@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { resolveAssetUrl } from '../utils/url';
-import Header from '../components/Header';
-import Footer from '../components/footer';
+import AdminLayout from '../components/admin/AdminLayout';
 import { getAdminPosts, createPost, updatePost, uploadImage, deletePost } from '../services/blogService';
 import { BLOG_CATEGORIES } from '../services/blogCategories';
 
@@ -86,10 +85,8 @@ export default function AdminBlogs() {
   }
 
   return (
-    <div>
-      <Header />
-      <div className="p-6 max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4">Manage Blogs</h2>
+    <AdminLayout title="Manage Blogs">
+      <div className="max-w-4xl mx-auto">
 
         <div className="bg-white p-4 rounded shadow mb-6">
           <h3 className="font-medium mb-2">{editing ? 'Edit Post' : 'Create Post'}</h3>
@@ -139,19 +136,32 @@ export default function AdminBlogs() {
         <div className="bg-white p-4 rounded shadow">
           <h2 className="font-medium mb-4">Existing Posts</h2>
           {loading ? <div>Loading...</div> : (
-            <div className="space-y-3">
-              {posts.map((p) => (
-                <div key={p.id} className="flex items-center justify-between border-b py-2">
-                  <div>
-                    <div className="font-semibold">{p.title}</div>
-                    <div className="text-sm text-gray-600">{p.slug} • {p.status}{p.category ? ` • ${p.category}` : ''}</div>
-                  </div>
-                  <div className="space-x-2">
-                    <button onClick={() => startEdit(p)} className="px-3 py-1 border rounded">Edit</button>
-                    <button onClick={() => { setDeleteTargetId(p.id); setShowDeleteModal(true); }} className="px-3 py-1 border rounded text-red-600">Delete</button>
-                  </div>
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm">
+                <thead className="bg-gray-50 text-gray-700">
+                  <tr>
+                    <th className="text-left px-4 py-2">Title</th>
+                    <th className="text-left px-4 py-2">Slug</th>
+                    <th className="text-left px-4 py-2">Status</th>
+                    <th className="text-left px-4 py-2">Category</th>
+                    <th className="px-4 py-2" />
+                  </tr>
+                </thead>
+                <tbody>
+                  {posts.map((p) => (
+                    <tr key={p.id} className="border-t">
+                      <td className="px-4 py-2 font-medium">{p.title}</td>
+                      <td className="px-4 py-2">{p.slug}</td>
+                      <td className="px-4 py-2">{p.status}</td>
+                      <td className="px-4 py-2">{p.category || '-'}</td>
+                      <td className="px-4 py-2 text-right whitespace-nowrap">
+                        <button onClick={() => startEdit(p)} className="px-3 py-1 border rounded mr-2">Edit</button>
+                        <button onClick={() => { setDeleteTargetId(p.id); setShowDeleteModal(true); }} className="px-3 py-1 border rounded text-red-600">Delete</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
         </div>
@@ -170,7 +180,6 @@ export default function AdminBlogs() {
           </div>
         ) : null}
       </div>
-      <Footer />
-    </div>
+    </AdminLayout>
   );
 }
