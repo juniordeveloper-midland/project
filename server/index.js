@@ -415,9 +415,16 @@ app.get('/api/social-media', async (req, res) => {
 app.get('/api/blogs', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit || '0', 10) || 0;
-    let sql = "SELECT id, title, slug, excerpt, featured_image, author, status, created_at, updated_at, published_at FROM blog_posts WHERE status = 'published' ORDER BY published_at DESC";
+    const category = (req.query.category || '').toString();
+    let sql = "SELECT id, title, slug, excerpt, featured_image, author, category, status, created_at, updated_at, published_at FROM blog_posts WHERE status = 'published'";
+    const params = [];
+    if (category) {
+      sql += ' AND category = ?';
+      params.push(category);
+    }
+    sql += ' ORDER BY published_at DESC';
     if (limit > 0) sql += ' LIMIT ' + limit;
-    const posts = await databaseService.query(sql);
+    const posts = await databaseService.query(sql, params);
     res.json({ success: true, data: posts });
   } catch (error) {
     console.error('Error fetching blogs:', error);
@@ -458,7 +465,7 @@ app.post('/api/admin/blogs', authMiddleware, async (req, res) => {
   try {
     console.log('[admin.blogs.create] user=', req.user && req.user.email, 'ip=', req.ip);
     console.log('[admin.blogs.create] body=', JSON.stringify(req.body || {}));
-    const { title, slug, content, excerpt, featured_image, author, status, published_at } = req.body || {};
+    const { title, slug, content, excerpt, featured_image, author, category, status, published_at } = req.body || {};
     if (!title || !slug || !content) return res.status(400).json({ success: false, message: 'title, slug and content are required' });
     // If publishing now and published_at not provided, set to current timestamp (store as UTC MySQL datetime)
     function toMySQLDatetime(d) {
@@ -468,8 +475,8 @@ app.post('/api/admin/blogs', authMiddleware, async (req, res) => {
     }
     const pubAt = status === 'published' ? toMySQLDatetime(published_at ? published_at : new Date()) : null;
     const insertId = await databaseService.insert(
-      'INSERT INTO blog_posts (title, slug, content, excerpt, featured_image, author, status, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [title, slug, content, excerpt || null, featured_image || null, author || 'G20 Security Team', status || 'draft', pubAt]
+      'INSERT INTO blog_posts (title, slug, content, excerpt, featured_image, author, category, status, published_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [title, slug, content, excerpt || null, featured_image || null, author || 'G20 Security Team', category || null, status || 'draft', pubAt]
     );
     res.json({ success: true, message: 'Blog created', id: insertId });
   } catch (error) {
@@ -481,7 +488,7 @@ app.post('/api/admin/blogs', authMiddleware, async (req, res) => {
 app.put('/api/admin/blogs/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, slug, content, excerpt, featured_image, author, status, published_at } = req.body || {};
+    const { title, slug, content, excerpt, featured_image, author, category, status, published_at } = req.body || {};
     // If status is published and no published_at provided, set it to now (store as UTC MySQL datetime)
     function toMySQLDatetime(d) {
       if (!d) return null;
@@ -490,8 +497,8 @@ app.put('/api/admin/blogs/:id', authMiddleware, async (req, res) => {
     }
     const pubAt = status === 'published' ? toMySQLDatetime(published_at ? published_at : new Date()) : (published_at ? toMySQLDatetime(published_at) : null);
     const affected = await databaseService.update(
-      'UPDATE blog_posts SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, author = ?, status = ?, published_at = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
-      [title, slug, content, excerpt || null, featured_image || null, author || 'G20 Security Team', status || 'draft', pubAt, id]
+      'UPDATE blog_posts SET title = ?, slug = ?, content = ?, excerpt = ?, featured_image = ?, author = ?, category = ?, status = ?, published_at = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+      [title, slug, content, excerpt || null, featured_image || null, author || 'G20 Security Team', category || null, status || 'draft', pubAt, id]
     );
     if (affected === 0) return res.status(404).json({ success: false, message: 'Blog not found' });
     res.json({ success: true, message: 'Blog updated' });

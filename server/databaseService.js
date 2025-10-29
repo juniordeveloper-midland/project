@@ -151,6 +151,17 @@ export class DatabaseService {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
       `);
 
+      // Ensure category column exists on blog_posts
+      try {
+        await this.query("ALTER TABLE blog_posts ADD COLUMN IF NOT EXISTS category VARCHAR(255) NULL AFTER author");
+      } catch (e) {
+        // Some MySQL variants don't support IF NOT EXISTS; fallback check
+        const col = await this.queryOne("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'blog_posts' AND COLUMN_NAME = 'category'");
+        if (!col) {
+          await this.query("ALTER TABLE blog_posts ADD COLUMN category VARCHAR(255) NULL AFTER author");
+        }
+      }
+
       // Create social_media_links table
       await this.query(`
         CREATE TABLE IF NOT EXISTS social_media_links (

@@ -11,6 +11,8 @@ import Policy from './policy/policy';
 import AdminLogin from './pages/AdminLogin.tsx';
 import AdminDashboard from './pages/AdminDashboard.tsx';
 import AdminBlogs from './pages/AdminBlogs';
+import AdminSubscribers from './pages/AdminSubscribers';
+import AdminContacts from './pages/AdminContacts';
 import { useEffect, useState } from 'react';
 import { getMe } from './services/authClient';
 
@@ -34,6 +36,8 @@ function App() {
         <Route path="/admin-access-login" element={<AdminLogin onLogin={() => setIsAuthed(true)} />} />
         <Route path="/admin-dashboard" element={isAuthed ? <AdminDashboard onLogout={() => setIsAuthed(false)} /> : <Navigate to="/admin-access-login" replace />} />
         <Route path="/admin-blogs" element={isAuthed ? <AdminBlogs /> : <Navigate to="/admin-access-login" replace />} />
+        <Route path="/admin-subscribers" element={isAuthed ? <AdminSubscribers /> : <Navigate to="/admin-access-login" replace />} />
+        <Route path="/admin-contacts" element={isAuthed ? <AdminContacts /> : <Navigate to="/admin-access-login" replace />} />
       </Routes>
     </BrowserRouter>
   );

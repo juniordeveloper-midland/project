@@ -22,8 +22,12 @@ async function safeFetch(input: RequestInfo, init?: RequestInit) {
   }
 }
 
-export async function getPublicPosts(limit?: number) {
-  const url = limit && limit > 0 ? buildUrl(`/api/blogs?limit=${limit}`) : buildUrl('/api/blogs');
+export async function getPublicPosts(limit?: number, category?: string) {
+  const params = new URLSearchParams();
+  if (limit && limit > 0) params.set('limit', String(limit));
+  if (category) params.set('category', category);
+  const qs = params.toString();
+  const url = buildUrl('/api/blogs' + (qs ? `?${qs}` : ''));
   const res = await safeFetch(url);
   const body = await parseJsonSafe(res);
   if (!res.ok) throw new Error(body?.message || `Failed to fetch posts (status ${res.status})`);

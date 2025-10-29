@@ -3,12 +3,13 @@ import { resolveAssetUrl } from '../utils/url';
 import Header from '../components/Header';
 import Footer from '../components/footer';
 import { getAdminPosts, createPost, updatePost, uploadImage, deletePost } from '../services/blogService';
+import { BLOG_CATEGORIES } from '../services/blogCategories';
 
 export default function AdminBlogs() {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<any | null>(null);
-  const [form, setForm] = useState({ title: '', slug: '', excerpt: '', content: '', featured_image: '', status: 'draft', author: '' });
+  const [form, setForm] = useState({ title: '', slug: '', excerpt: '', content: '', featured_image: '', status: 'draft', author: '', category: '' });
   const [file, setFile] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -35,7 +36,8 @@ export default function AdminBlogs() {
       content: p.content || '',
       featured_image: p.featured_image || '',
       status: p.status || 'draft',
-      author: p.author || ''
+      author: p.author || '',
+      category: p.category || ''
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setPreviewUrl(p.featured_image ? resolveAssetUrl(p.featured_image) : null);
@@ -59,7 +61,7 @@ export default function AdminBlogs() {
       setEditing(null);
       setFile(null);
       setPreviewUrl(null);
-      setForm({ title: '', slug: '', excerpt: '', content: '', featured_image: '', status: 'draft', author: '' });
+      setForm({ title: '', slug: '', excerpt: '', content: '', featured_image: '', status: 'draft', author: '', category: '' });
     } catch (e: any) {
       setErrorMessage(e?.message || 'Save failed');
     }
@@ -68,6 +70,7 @@ export default function AdminBlogs() {
   async function confirmDelete() {
     if (!deleteTargetId) return;
     setDeleteLoading(true);
+    console.log('Attempting to delete post with id:', deleteTargetId);
     try {
       await deletePost(deleteTargetId);
       const refreshed = await getAdminPosts();
@@ -75,6 +78,7 @@ export default function AdminBlogs() {
       setShowDeleteModal(false);
       setDeleteTargetId(null);
     } catch (err: any) {
+      console.error('Delete failed:', err);
       alert(err?.message || 'Failed to delete');
     } finally {
       setDeleteLoading(false);
@@ -113,6 +117,12 @@ export default function AdminBlogs() {
               <option value="draft">Draft</option>
               <option value="published">Published</option>
             </select>
+            <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} className="border p-2 rounded">
+              <option value="">Select category</option>
+              {BLOG_CATEGORIES.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
             <input value={form.excerpt} onChange={e => setForm({ ...form, excerpt: e.target.value })} placeholder="Excerpt" className="border p-2 rounded md:col-span-2" />
             <textarea value={form.content} onChange={e => setForm({ ...form, content: e.target.value })} placeholder="Content (HTML allowed)" className="border p-2 rounded md:col-span-2" rows={8} />
           </div>
@@ -122,7 +132,7 @@ export default function AdminBlogs() {
 
           <div className="mt-3">
             <button onClick={save} className="bg-blue-600 text-white px-4 py-2 rounded mr-2">Save</button>
-            {editing && <button onClick={() => { setEditing(null); setForm({ title: '', slug: '', excerpt: '', content: '', featured_image: '', status: 'draft', author: '' }); setPreviewUrl(null); }} className="px-3 py-2 border rounded">Cancel</button>}
+            {editing && <button onClick={() => { setEditing(null); setForm({ title: '', slug: '', excerpt: '', content: '', featured_image: '', status: 'draft', author: '', category: '' }); setPreviewUrl(null); }} className="px-3 py-2 border rounded">Cancel</button>}
           </div>
         </div>
 
@@ -134,7 +144,7 @@ export default function AdminBlogs() {
                 <div key={p.id} className="flex items-center justify-between border-b py-2">
                   <div>
                     <div className="font-semibold">{p.title}</div>
-                    <div className="text-sm text-gray-600">{p.slug} • {p.status}</div>
+                    <div className="text-sm text-gray-600">{p.slug} • {p.status}{p.category ? ` • ${p.category}` : ''}</div>
                   </div>
                   <div className="space-x-2">
                     <button onClick={() => startEdit(p)} className="px-3 py-1 border rounded">Edit</button>
