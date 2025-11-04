@@ -7,7 +7,7 @@ const OurServices = () => {
     navigate('/services');
   };
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-gray-50 py-16 defer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -28,6 +28,10 @@ const OurServices = () => {
                   src="/images/Static Guarding.jpg" 
                   alt="Static Guarding - Professional security guard in high-visibility uniform"
                   className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={400}
                 />
               </div>
             </div>
@@ -53,6 +57,10 @@ const OurServices = () => {
                   src="/images/Man Guarding.jpg" 
                   alt="Man Guarding - Professional security officer in tactical gear"
                   className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={400}
                 />
               </div>
             </div>
@@ -78,6 +86,10 @@ const OurServices = () => {
                 src="/images/Private Security.jpg" 
                 alt="Private Security - Professional security personnel with radio equipment"
                 className="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+                width={600}
+                height={400}
               />
             </div>
             </div>
@@ -103,6 +115,10 @@ const OurServices = () => {
                 src="/images/Mobile Patrols.jpg" 
                 alt="Mobile Patrols - Security patrol vehicle and officer"
                 className="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+                width={600}
+                height={400}
               />
             </div>
             </div>
@@ -128,6 +144,10 @@ const OurServices = () => {
                 src="/images/Event Security.jpg" 
                 alt="Event Security - Security officers at event venue entrance"
                 className="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+                width={600}
+                height={400}
               />
             </div>
             </div>
@@ -153,6 +173,10 @@ const OurServices = () => {
                 src="/images/Access Control.jpg" 
                 alt="Access Control - Professional security officer at building entrance"
                 className="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+                width={600}
+                height={400}
               />
             </div>
             </div>

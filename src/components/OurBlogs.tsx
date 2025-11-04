@@ -17,7 +17,7 @@ const OurBlogs = () => {
   }, []);
 
   return (
-    <section className="bg-blue-900 py-16">
+    <section className="bg-blue-900 py-16 defer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white mb-4">Our Blogs</h2>
@@ -43,7 +43,7 @@ const OurBlogs = () => {
               <div key={p.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
                 <Link to={`/blogs/${p.id}`} className="block relative">
                   <div className="relative h-48 bg-gray-200">
-                    <img src={resolveAssetUrl(p.featured_image) || '/images/Man Gaurding3.jpg'} alt={p.title} className="w-full h-full object-cover" />
+                    <img src={resolveAssetUrl(p.featured_image) || '/images/Man Gaurding3.jpg'} alt={p.title} className="w-full h-full object-cover" loading="lazy" decoding="async" width={640} height={384} />
                   </div>
                 </Link>
                 <div className="p-4">

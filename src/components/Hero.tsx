@@ -36,6 +36,10 @@ const Hero = () => {
                 src="/images/homehero.png" 
                 alt="Security Personnel"
                 className="w-full h-auto max-w-md ml-auto"
+                decoding="async"
+                fetchpriority="high"
+                width={640}
+                height={640}
               />
             </div>
           </div>

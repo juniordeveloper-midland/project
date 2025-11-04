@@ -12,6 +12,8 @@ const Footer: React.FC = () => {
                 src="/images/G20Logo.jpg"
                 alt="G20Security Logo"
                 className="h-9 w-9 object-contain"
+                loading="lazy"
+                decoding="async"
               />
               <span className="text-xl font-semibold">G20SECURITY</span>
             </div>

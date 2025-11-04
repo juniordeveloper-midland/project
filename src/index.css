@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Smooth scrolling for anchor jumps */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hint the browser to decode images off main thread and reduce layout shifts */
+img {
+  image-rendering: auto;
+}
+
+/* Defer heavy, below-the-fold sections without affecting above-the-fold */
+.defer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
+}

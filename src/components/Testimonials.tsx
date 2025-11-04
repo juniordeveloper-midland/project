@@ -80,7 +80,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   }
 
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}>
+    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 defer ${className}`}>
       {testimonials.map((testimonial, index) => (
         <div
           key={index}
@@ -93,6 +93,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({
                 src={testimonial.customer_image}
                 alt={testimonial.customer_name}
                 className="w-12 h-12 rounded-full object-cover mr-4"
+                loading="lazy"
+                decoding="async"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
